@@ -1,0 +1,43 @@
+﻿@model mvc.Models.Classroom
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<link rel="stylesheet" href="~/css/usersCRUD.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/default.css" asp-append-version="true" />
+
+<h1 class="centerDiv">Edit</h1>
+
+<div class="centerDiv">
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="id" />
+        <div>
+            <label asp-for="name" class="control-label"></label>
+            <input asp-for="name" class="form-control" />
+            <span asp-validation-for="name" class="text-danger"></span>
+        </div>
+        <div>
+            <label for="photoFile" class="control-label">Upload New Document</label>
+            <input type="file" name="photoFile" id="photoFile" class="form-control" />
+            <span class="text-danger">@ViewData["FileUploadError"]</span>
+        </div>
+        <div>
+            <label asp-for="code" class="control-label"></label>
+            <input asp-for="code" class="form-control" />
+            <span asp-validation-for="code" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="professorId" class="control-label"></label>
+            <input asp-for="professorId" class="form-control" />
+            <span asp-validation-for="professorId" class="text-danger"></span>
+        </div>
+        <div class="centerDiv">
+            <input type="submit" value="Save" class="btn" />
+        </div>
+    </form>
+</div>
+
+<div class="centerDiv">
+    <a asp-action="Index" class="btn">Back to List</a>
+</div>

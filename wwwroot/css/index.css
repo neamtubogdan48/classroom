@@ -1,0 +1,96 @@
+.homepageSection {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: row;
+    list-style-type: none;
+    margin: 0;
+    gap: 275px;
+}
+
+.homepageRight {
+    background-color: #3354a7;
+    border-radius: 10px;
+    margin-bottom: 70px;
+}
+
+.homepageLeft h1{
+    font-size:  2rem;
+    text-transform: uppercase;
+    color:#ff0000;
+    margin-bottom: 0px;
+    text-shadow: 2px 2px 4px #000000;
+    margin-top: 290px;
+}
+
+.homepageLeft p{
+    font-size:1.4rem;
+    color:#fbff00;
+    margin-bottom: 0px;
+    margin-top:2px;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.redirectButton {
+    display: inline-block;
+    font-size: 2rem; /* Crește dimensiunea fontului */
+    background: var(--main-color);
+    color: rgb(16, 72, 227);
+    cursor: pointer;
+    transition: all .3s ease Os;
+    text-shadow: 2px 2px 4px #000000;  
+}
+
+.redirectButton:hover {
+    background: #233e80;
+    color: #fff;
+}
+
+.homeBody {
+    background-image: url("../images/fundal2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+}
+
+.nextMatch {
+    display: flex;
+    justify-content: center; /* Center the items horizontally */
+    align-items: center; /* Align items to the top */
+    flex-direction: column; /* Display items in a row */
+    list-style-type: none;
+    padding: 0px 5px;
+}
+
+.nextMatch h1 {
+    font-size: 30px;
+    margin-bottom: 10px;
+    font-style: italic, bold;
+    margin-top: 5px;
+}
+
+.nextMatch p{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.table {
+    display: flex;
+    justify-content: center; /* Center the items horizontally */
+    align-items: center; /* Align items to the top */
+    flex-direction: column; /* Display items in a row */
+    list-style-type: none;
+    padding: 5px 5px;
+    margin-bottom: 0px; /* Add some margin at the bottom */
+    text-align: left;
+}
+
+.table h1 {
+    margin-top: 0px;
+    margin-bottom: 0px; /* Remove the bottom margin */
+}
+
+.table p {
+    margin-top: 0px; /* Remove the top margin */
+}

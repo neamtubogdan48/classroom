@@ -1,0 +1,32 @@
+﻿@model mvc.Models.ClassroomStudents
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<link rel="stylesheet" href="~/css/usersCRUD.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/default.css" asp-append-version="true" />
+
+<h1 class="centerDiv">Create</h1>
+
+<div class="centerDiv">
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+        <div>
+            <label asp-for="userId" class="control-label"></label>
+            <input asp-for="userId" class="form-control" />
+            <span asp-validation-for="userId" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="classroomId" class="control-label"></label>
+            <input asp-for="classroomId" class="form-control" />
+            <span asp-validation-for="classroomId" class="text-danger"></span>
+        </div>
+        <div class="centerDiv">
+            <input type="submit" value="Create" class="btn" />
+        </div>
+    </form>
+</div>
+
+<div class="centerDiv">
+    <a asp-action="Index" class="btn">Back to List</a>
+</div>

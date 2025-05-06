@@ -1,0 +1,49 @@
+﻿@model mvc.Models.Classroom
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<link rel="stylesheet" href="~/css/usersCRUD.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/default.css" asp-append-version="true" />
+
+<h1 class="centerDiv">Are you sure you want to delete this entry?</h1>
+
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.id)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.name)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.code)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.professorId)
+		</th>
+	</tr>
+	<tr>
+		<td>
+			@Html.DisplayFor(model => model.id)
+		</td>
+		<td>
+			@Html.DisplayFor(model => model.name)
+		</td>
+		<td>
+			@Html.DisplayFor(model => model.code)
+		</td>
+		<td>
+			@Html.DisplayFor(model => model.professorId)
+		</td>
+	</tr>
+</table>
+
+<div class="centerDiv">
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="id" />
+        <input type="submit" value="Delete" class="btn" /> |
+        <a asp-action="Index" class="btn">Back to List</a>
+    </form>
+</div>

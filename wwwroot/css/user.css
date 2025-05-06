@@ -1,0 +1,40 @@
+.userInfo {
+    display: flex;
+    flex-direction: column; /* Arrange items in a column */
+    justify-content: center; /* Center the items horizontally */
+    align-items: center; /* Center the items vertically */
+    text-align: center; /* Center the text */
+}
+
+.userBody {
+    background-image: url("../images/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+}
+.userInfo h1 {
+    margin-bottom: 15px; /* Add some space below the heading */
+}
+
+.userInfo h2 {
+    margin: 0; /* Remove the margin */
+}
+
+.loginButton {
+    margin-top: 10px; /* Crește spațiul de deasupra butonului */
+    display: inline-block;
+    padding: 12px 20px; /* Crește dimensiunea padding-ului */
+    font-size: 1.5rem; /* Crește dimensiunea fontului */
+    background: #3354a7;
+    color: #fff;
+    cursor: pointer;
+    transition: all .3s ease Os;
+    border: 2px solid #edf0f1;
+    border-radius: 10px;
+}
+
+.loginButton:hover {
+    background: #233e80;
+    color: #fff;
+}

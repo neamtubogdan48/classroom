@@ -1,0 +1,77 @@
+﻿@model mvc.Models.UserAccount
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<link rel="stylesheet" href="~/css/usersCRUD.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/default.css" asp-append-version="true" />
+
+<h1 class="centerDiv">Details</h1>
+
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.Id)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.UserName)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Email)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.accountType)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.notificationSettings)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.githubLink)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.PhoneNumber)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.profilePhoto)
+		</th>
+	</tr>
+	<tr>
+		<td>
+			@Html.DisplayFor(model => model.Id)
+		</td>
+		<td>
+			@Html.DisplayFor(model => model.UserName)
+		</td>
+		<td>
+			@Html.DisplayFor(model => model.Email)
+		</td>
+		<td>
+			@Html.DisplayFor(model => model.accountType)
+		</td>
+		<td>
+			@Html.DisplayFor(model => model.notificationSettings)
+		</td>
+		<td>
+			@Html.DisplayFor(model => model.githubLink)
+		</td>
+		<td>
+			@Html.DisplayFor(model => model.PhoneNumber)
+		</td>
+		<td>
+			@if (!string.IsNullOrEmpty(Model.profilePhoto))
+			{
+				<a href="@Model.profilePhoto" target="_blank">@Html.DisplayFor(model => model.profilePhoto)</a>
+			}
+			@if (string.IsNullOrEmpty(Model.profilePhoto))
+			{
+				<span>No document uploaded</span>
+			}
+		</td>
+	</tr>
+</table>
+
+<div class="centerDiv">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn">Edit</a> |
+    <a asp-action="Index" class="btn">Back to List</a>
+</div>

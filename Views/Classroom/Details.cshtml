@@ -1,0 +1,59 @@
+﻿@model mvc.Models.Classroom
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<link rel="stylesheet" href="~/css/usersCRUD.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/default.css" asp-append-version="true" />
+
+<h1 class="centerDiv">Details</h1>
+
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.id)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.name)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.photo)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.code)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.professorId)
+		</th>
+	</tr>
+	<tr>
+		<td>
+			@Html.DisplayFor(model => model.id)
+		</td>
+		<td>
+			@Html.DisplayFor(model => model.name)
+		</td>
+		<th>
+			@if (!string.IsNullOrEmpty(Model.photo))
+			{
+				<a href="@Model.photo" target="_blank">@Html.DisplayFor(model => model.photo)</a>
+			}
+			@if (string.IsNullOrEmpty(Model.photo))
+			{
+				<span>No document uploaded</span>
+			}
+		</th>
+		<td>
+			@Html.DisplayFor(model => model.code)
+		</td>
+		<td>
+			@Html.DisplayFor(model => model.professorId)
+		</td>
+	</tr>
+</table>
+
+<div class="centerDiv">
+    <a asp-action="Edit" asp-route-id="@Model.id" class="btn">Edit</a> |
+    <a asp-action="Index" class="btn">Back to List</a>
+</div>

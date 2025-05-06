@@ -1,0 +1,77 @@
+﻿@model mvc.Models.Assignment
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<link rel="stylesheet" href="~/css/usersCRUD.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/default.css" asp-append-version="true" />
+
+<h1 class="centerDiv">Details</h1>
+
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.id)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.name)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.description)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.deadline)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.requirementsDoc)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.lateTurnInOption)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.noDeadlineOption)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.classroomId)
+		</th>
+	</tr>
+	<tr>
+		<td>
+			@Html.DisplayFor(model => model.id)
+		</td>
+		<td>
+			@Html.DisplayFor(model => model.name)
+		</td>
+		<td>
+			@Html.DisplayFor(model => model.description)
+		</td>
+		<td>
+			@Html.DisplayFor(model => model.deadline)
+		</td>
+		<td>
+			@if (!string.IsNullOrEmpty(Model.requirementsDoc))
+			{
+				<a href="@Model.requirementsDoc" target="_blank">@Html.DisplayFor(model => model.requirementsDoc)</a>
+			}
+			@if (string.IsNullOrEmpty(Model.requirementsDoc))
+			{
+				<span>No document uploaded</span>
+			}
+		</td>
+		<td>
+			@Html.DisplayFor(model => model.lateTurnInOption)
+		</td>
+		<td>
+			@Html.DisplayFor(model => model.noDeadlineOption)
+		</td>
+		<td>
+			@Html.DisplayFor(model => model.classroomId)
+		</td>
+	</tr>
+</table>
+
+<div class="centerDiv">
+    <a asp-action="Edit" asp-route-id="@Model.id" class="btn">Edit</a> |
+    <a asp-action="Index" class="btn">Back to List</a>
+</div>

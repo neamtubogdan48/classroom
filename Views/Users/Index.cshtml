@@ -1,0 +1,86 @@
+﻿@model IEnumerable<mvc.Models.UserAccount>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link rel="stylesheet" href="~/css/usersCRUD.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/default.css" asp-append-version="true" />
+
+<h1 class="centerDiv">Users</h1>
+
+<p class="centerDiv">
+    <a asp-action="Create" class="btn">Create New</a>
+</p>
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.accountType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.notificationSettings)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.githubLink)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.profilePhoto)
+        </th>
+		<th>Actions</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.accountType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.notificationSettings)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.githubLink)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @if (!string.IsNullOrEmpty(item.profilePhoto))
+                {
+                    <a href="@item.profilePhoto" target="_blank">@Html.DisplayFor(modelItem => item.profilePhoto)</a>
+                }
+                @if (string.IsNullOrEmpty(item.profilePhoto))
+                {
+                    <span>No document uploaded</span>
+                }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn">Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,85 @@
+﻿@model IEnumerable<mvc.Models.Assignment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link rel="stylesheet" href="~/css/usersCRUD.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/default.css" asp-append-version="true" />
+
+<h1 class="centerDiv">Assignments</h1>
+
+<p class="centerDiv">
+    <a asp-action="Create" class="btn">Create New</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deadline)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.requirementsDoc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lateTurnInOption)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.noDeadlineOption)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.classroomId)
+        </th>
+		<th>Actions</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.deadline)
+            </td>
+            <td>
+                @if (!string.IsNullOrEmpty(item.requirementsDoc))
+                {
+                    <a href="@item.requirementsDoc" target="_blank">@Html.DisplayFor(modelItem => item.requirementsDoc)</a>
+                }
+                @if (string.IsNullOrEmpty(item.requirementsDoc))
+                {
+                    <span>No document uploaded</span>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lateTurnInOption)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.noDeadlineOption)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.classroomId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id" class="btn">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id" class="btn">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id" class="btn">Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>

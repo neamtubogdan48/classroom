@@ -1,0 +1,68 @@
+﻿@model IEnumerable<mvc.Models.Classroom>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link rel="stylesheet" href="~/css/usersCRUD.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/default.css" asp-append-version="true" />
+
+<h1 class="centerDiv">Classrooms</h1>
+
+<p class="centerDiv">
+    <a asp-action="Create" class="btn">Create New</a>
+</p>
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.photo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.professorId)
+        </th>
+		<th>Actions</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <th>
+                @if (!string.IsNullOrEmpty(item.photo))
+                {
+                    <a href="@item.photo" target="_blank">@Html.DisplayFor(modelItem => item.photo)</a>
+                }
+                @if (string.IsNullOrEmpty(item.photo))
+                {
+                    <span>No document uploaded</span>
+                }
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.professorId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id" class="btn">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id" class="btn">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id" class="btn">Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>

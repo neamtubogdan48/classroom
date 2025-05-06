@@ -1,0 +1,68 @@
+.loginForm {
+    max-width: 400px;
+    margin: 50px auto; /* Center the form horizontally */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.loginForm h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #3354a7;
+    font-size: 1.5rem;
+    text-shadow: 0 0 0 #fff;
+}
+
+.inputBox {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.inputBox span {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #3354a7;
+}
+
+.inputBox input {
+    width: 87%;
+    padding: 10px 10px 10px 40px;
+    border: 1px solid #3354a7;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    font-size: 1rem;
+}
+
+.inputBox input:focus {
+    border-color: #3354a7;
+    outline: none;
+}
+
+.loginBox {
+    display: flex;
+    justify-content: center; /* Center the items horizontally */
+    align-items: center; /* Center the items vertically */
+}
+
+.loginButton {
+    margin-top: 10px; /* Crește spațiul de deasupra butonului */
+    display: inline-block;
+    padding: 12px 20px; /* Crește dimensiunea padding-ului */
+    font-size: 1.5rem; /* Crește dimensiunea fontului */
+    background: #3354a7;
+    color: #fff;
+    cursor: pointer;
+    transition: all .3s ease Os;
+    border: 2px solid #edf0f1;
+    border-radius: 10px;
+}
+
+.loginButton:hover {
+    background: #233e80;
+    color: #fff;
+}

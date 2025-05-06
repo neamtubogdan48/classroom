@@ -1,0 +1,68 @@
+﻿@model IEnumerable<mvc.Models.Document>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link rel="stylesheet" href="~/css/usersCRUD.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/default.css" asp-append-version="true" />
+
+<h1 class="centerDiv">Documents</h1>
+
+<p class="centerDiv">
+    <a asp-action="Create" class="btn">Create New</a>
+</p>
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.studentDoc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.grade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.assignmentId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.userId)
+        </th>
+		<th>Actions</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @if (!string.IsNullOrEmpty(item.studentDoc))
+                {
+                    <a href="@item.studentDoc" target="_blank">@Html.DisplayFor(modelItem => item.studentDoc)</a>
+                }
+                @if (string.IsNullOrEmpty(item.studentDoc))
+                {
+                    <span>No document uploaded</span>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.grade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.assignmentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.userId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id" class="btn">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id" class="btn">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id" class="btn">Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
