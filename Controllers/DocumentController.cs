@@ -83,6 +83,7 @@ namespace mvc.Controllers
             else
             {
                 ModelState.AddModelError("studentDoc", "Please upload a document.");
+                Console.WriteLine("No file uploaded.");
             }
 
             if (ModelState.IsValid)

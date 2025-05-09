@@ -32,68 +32,96 @@ namespace mvc.Controllers
             return View(assignment);
         }
 
-        // GET: Assignment/Create
-        public IActionResult Create()
+        // GET: Assignment/Create/{classroomId}
+        public IActionResult Create(int id) // 'id' here represents the classroomId
         {
-            return View();
+            var model = new Assignment
+            {
+                classroomId = id // Assign the classroomId from the URL
+            };
+            return View(model);
         }
 
-        // POST: Assignment/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("name,description,deadline,lateTurnInOption,noDeadlineOption,classroomId")] Assignment assignment, IFormFile requirementsDocFile)
+        public async Task<IActionResult> Create([Bind("name,description,deadline,lateTurnInOption,noDeadlineOption,classroomId")] Assignment assignment, IFormFile? requirementsDocFile)
         {
             if (requirementsDocFile != null && requirementsDocFile.Length > 0)
             {
+                Console.WriteLine($"File Name: {requirementsDocFile.FileName}");
+                Console.WriteLine($"File Size: {requirementsDocFile.Length} bytes");
+
                 // Validate file size (max 100MB)
                 const long maxFileSize = 100 * 1024 * 1024; // 100MB in bytes
                 if (requirementsDocFile.Length > maxFileSize)
                 {
+                    Console.WriteLine("File size exceeds the maximum allowed size.");
                     ModelState.AddModelError("requirementsDoc", "The file size cannot exceed 100MB.");
                 }
 
                 // Validate file type
                 var allowedExtensions = new[] { ".pdf", ".docx", ".txt", ".zip", ".rar" };
                 var fileExtension = Path.GetExtension(requirementsDocFile.FileName).ToLower();
+                Console.WriteLine($"File Extension: {fileExtension}");
 
                 if (!allowedExtensions.Contains(fileExtension))
                 {
+                    Console.WriteLine("Invalid file type.");
                     ModelState.AddModelError("requirementsDoc", "Only PDF, DOCX, TXT, and archive files are allowed.");
                 }
 
                 if (ModelState.IsValid)
                 {
-                    // Define the path to save the uploaded file
-                    var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/assignments");
-                    Directory.CreateDirectory(uploadsFolder); // Ensure the directory exists
-
-                    var uniqueFileName = Guid.NewGuid().ToString() + fileExtension;
-                    var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-                    // Save the file to the server
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    try
                     {
-                        await requirementsDocFile.CopyToAsync(stream);
-                    }
+                        // Define the path to save the uploaded file
+                        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/assignments");
+                        Directory.CreateDirectory(uploadsFolder); // Ensure the directory exists
+                        Console.WriteLine($"Uploads Folder: {uploadsFolder}");
 
-                    // Save the file path in the requirementsDoc property
-                    assignment.requirementsDoc = $"/uploads/assignments/{uniqueFileName}";
+                        var uniqueFileName = Guid.NewGuid().ToString() + fileExtension;
+                        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                        Console.WriteLine($"File Path: {filePath}");
+
+                        // Save the file to the server
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await requirementsDocFile.CopyToAsync(stream);
+                        }
+
+                        // Save the file path in the requirementsDoc property
+                        assignment.requirementsDoc = $"/uploads/assignments/{uniqueFileName}";
+                        Console.WriteLine($"File saved successfully: {assignment.requirementsDoc}");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error saving file: {ex.Message}");
+                        ModelState.AddModelError("requirementsDoc", "An error occurred while saving the file.");
+                    }
                 }
             }
             else
             {
-                ModelState.AddModelError("requirementsDoc", "Please upload a requirements document.");
+                // If no file is uploaded, set the requirementsDoc property to null or an empty string
+                assignment.requirementsDoc = null;
+                Console.WriteLine("No file uploaded. Proceeding without a requirements document.");
             }
 
             if (ModelState.IsValid)
             {
                 // Convert deadline to UTC
                 assignment.deadline = DateTime.SpecifyKind(assignment.deadline, DateTimeKind.Utc);
+                if (assignment.noDeadlineOption)
+                {
+                    assignment.deadline = DateTime.MaxValue; // Set to a far future date if no deadline option is selected
+                }
 
                 await _assignmentService.AddAssignmentAsync(assignment);
+                Console.WriteLine("Assignment created successfully.");
                 return RedirectToAction(nameof(Index));
             }
 
+            Console.WriteLine("ModelState is invalid.");
             return View(assignment);
         }
 
@@ -111,7 +139,7 @@ namespace mvc.Controllers
         // POST: Assignment/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,name,description,deadline,lateTurnInOption,noDeadlineOption,classroomId")] Assignment assignment, IFormFile requirementsDocFile)
+        public async Task<IActionResult> Edit(int id, [Bind("id,name,description,deadline,lateTurnInOption,noDeadlineOption,classroomId")] Assignment assignment, IFormFile? requirementsDocFile)
         {
             if (id != assignment.id)
             {
@@ -125,6 +153,31 @@ namespace mvc.Controllers
                 return NotFound();
             }
 
+            // Update only the fields that are provided or changed
+            if (!string.IsNullOrEmpty(assignment.name) && assignment.name != existingAssignment.name)
+            {
+                existingAssignment.name = assignment.name;
+            }
+
+            if (!string.IsNullOrEmpty(assignment.description) && assignment.description != existingAssignment.description)
+            {
+                existingAssignment.description = assignment.description;
+            }
+
+            if (assignment.deadline != default && assignment.deadline != existingAssignment.deadline)
+            {
+                existingAssignment.deadline = DateTime.SpecifyKind(assignment.deadline, DateTimeKind.Utc);
+            }
+
+            existingAssignment.lateTurnInOption = assignment.lateTurnInOption;
+            existingAssignment.noDeadlineOption = assignment.noDeadlineOption;
+
+            if (assignment.classroomId != existingAssignment.classroomId)
+            {
+                existingAssignment.classroomId = assignment.classroomId;
+            }
+
+            // Handle file upload only if a new file is provided
             if (requirementsDocFile != null && requirementsDocFile.Length > 0)
             {
                 // Validate file size (max 100MB)
@@ -169,22 +222,20 @@ namespace mvc.Controllers
                     }
 
                     // Update the file path in the requirementsDoc property
-                    assignment.requirementsDoc = $"/uploads/assignments/{uniqueFileName}";
+                    existingAssignment.requirementsDoc = $"/uploads/assignments/{uniqueFileName}";
                 }
             }
-            else
+
+            // If no new file is uploaded, retain the existing file path
+            if (requirementsDocFile == null)
             {
-                // Retain the existing file path if no new file is uploaded
                 assignment.requirementsDoc = existingAssignment.requirementsDoc;
             }
 
             if (ModelState.IsValid)
             {
-                // Convert deadline to UTC
-                assignment.deadline = DateTime.SpecifyKind(assignment.deadline, DateTimeKind.Utc);
-
                 // Update the assignment in the database
-                await _assignmentService.UpdateAssignmentAsync(assignment);
+                await _assignmentService.UpdateAssignmentAsync(existingAssignment);
                 return RedirectToAction(nameof(Index));
             }
 

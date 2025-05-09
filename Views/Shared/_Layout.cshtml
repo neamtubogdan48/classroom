@@ -4,7 +4,6 @@
     var currentUser = ViewData["CurrentUser"] as mvc.Models.UserAccount;
 }
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,49 +13,10 @@
     <link rel="stylesheet" href="~/css/default.css" asp-append-version="true">
 </head>
 <body>
-    <header class="header">
-        <a asp-controller="Home" asp-action="Index">
-            <img class="logo" src="~/images/logo.ico" alt="logo" width="150" height="150">
-        </a>
-        <nav class="navbar">
-            <ul>
-                <li><a asp-controller="Home" asp-action="News">Stiri</a></li>
-                <li><a asp-controller="Home" asp-action="Schedule">Program</a></li>
-                <li><a asp-controller="Home" asp-action="History">Istoric</a></li>
-                <li><a asp-controller="Home" asp-action="Players">Jucatori</a></li>
-                <li><a asp-controller="Subscription" asp-action="Subscription">Abonamente</a></li>
-                <li><a asp-controller="Home" asp-action="Sponsors">Sponsori</a></li>
-                <li><a asp-controller="Contact" asp-action="Contact">Contact</a></li>
-
-                @if (signInManager.IsSignedIn(User))
-                {
-                    <li><a asp-controller="Home" asp-action="User">User</a></li>
-                    <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
-                }
-                else
-                {
-                    <li><a asp-controller="Account" asp-action="Login">Login</a></li>
-                    <li><a asp-controller="Account" asp-action="Register">Register</a></li>
-                }
-            </ul>
-        </nav>
-
-        @if (signInManager.IsSignedIn(User))
-        {
-            <a asp-controller="Home" asp-action="User">
-                <img id="profilePhoto" src="@Url.Content(currentUser?.profilePhoto)" alt="Profile" width="100" height="100">
-            </a>
-        }
-    </header>
     <div>
         @RenderBody()
     </div>
 
-    <footer class="footer">
-        <p>©Universitatea Craiova 2025</p>
-    </footer>
-
-    <script src="~/js/footer.js" asp-append-version="true"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>

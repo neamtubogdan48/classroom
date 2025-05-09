@@ -55,6 +55,13 @@
             <span class="text-danger">@ViewData["FileUploadError"]</span>
         </div>
         <div class="centerDiv">
+            <label>
+                <input type="checkbox" id="resetProfilePhotoCheckbox" data-user-id="@Model.Id" />
+                Reset Profile Photo
+            </label>
+        </div>
+
+        <div class="centerDiv">
             <input type="submit" value="Save" class="btn" />
         </div>
     </form>
@@ -63,3 +70,6 @@
 <div class="centerDiv">
     <a asp-action="Index" class="btn">Back to List</a>
 </div>
+
+<script src="~/js/deleteProfilePhoto.js" asp-append-version="true"></script>
+

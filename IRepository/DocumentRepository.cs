@@ -44,5 +44,14 @@ namespace mvc.IRepository
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<IEnumerable<Document>> GetDocumentsByAssignmentIdAsync(int assignmentId)
+        {
+            return await _context.Document
+                .AsNoTracking() // Ensures no tracking for better performance
+                .Where(doc => doc.assignmentId == assignmentId)
+                .ToListAsync();
+        }
+
     }
 }

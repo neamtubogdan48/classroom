@@ -44,5 +44,27 @@ namespace mvc.IRepository
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<IEnumerable<Classroom>> GetClassroomsByUserIdAsync(string userId)
+        {
+            return await _context.ClassroomStudents
+                .Where(cs => cs.userId == userId)
+                .Join(_context.Classroom,
+                      cs => cs.classroomId,
+                      c => c.id,
+                      (cs, c) => c)
+                .ToListAsync();
+        }
+
+        public async Task<Classroom?> GetClassroomByIdAsync(int id)
+        {
+            return await _context.Classroom.FirstOrDefaultAsync(c => c.id == id);
+        }
+
+        public async Task<ClassroomStudents?> GetClassroomStudentByIdAsync(int classroomId, string userId)
+        {
+            return await _context.ClassroomStudents
+                .FirstOrDefaultAsync(cs => cs.classroomId == classroomId && cs.userId == userId);
+        }
     }
 }

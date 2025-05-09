@@ -1,0 +1,36 @@
+login(userCredentials: object) DA
+requestPassReset(username: string)
+leaveComment(assignmentID: int, commentDetails: string) 
+receiveNotification(userID: int, notificationDetails: object)
+disableNotifications(userID: int)
+changeEmail(user: object, newMail: string) DA
+changePassword(user: object, newPassword: string)
+changeProfilePhoto(user: object, newPhoto: file) DA
+deleteProfilePhoto(userID: int) DA
+changeNumber(user: object, newNumber: string) DA
+changeGitHub(user: object, newGitHub: string) DA
+viewClassroom(classroomID: int) DA
+viewAssignment(assignmentID: int) 
+showStudentList(classroomID: int)
+showProfessorList(classroomID: int)
+createClassroom(classroomDetails: object) DA
+editClassroom(classroomID: int, classroomDetails: object) DA
+createAssignment(assignmentDetails: object) DA
+editAssignment(assignmentID: int, assignmentDetails: object) DA
+deleteAssignment(assignmentID: int) DA
+kickStudent(classroomID: int, studentID: int)
+resetCode(classroomID: int)
+changeClassPhoto(classroomID: int, newPhoto: file) DA
+grade(documentID: int, grade: int)
+downloadDocument(documentID: int) 
+disableLateTurnIns(assignmentID: int)
+disableDeadline(assignmentID: int)
+changeAccType(userID: int, newType: string) DA
+deleteAccount(userID: int) DA
+deleteClassroom(classroomID: int) DA
+kickProfessor(classroomID: int, professorID: int)
+resetPassword(userID: int, newPassword: string)
+joinClassroom(userID: int, classroomID: int)
+leaveClassroom(userID: int, classroomID: int)
+uploadDocument(document: file)
+withdrawDocument(documentID: int)

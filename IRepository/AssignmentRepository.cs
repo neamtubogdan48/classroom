@@ -44,5 +44,20 @@ namespace mvc.IRepository
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<IEnumerable<Assignment>> GetAssignmentsByClassroomIdAsync(int classroomId)
+        {
+            return await _context.Assignment
+                .Where(a => a.classroomId == classroomId)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<AssignmentChat>> GetAssignmentChatsByAssignmentIdAsync(int assignmentId)
+        {
+            return await _context.AssignmentChat
+                .Where(ac => ac.assignmentId == assignmentId)
+                .ToListAsync();
+        }
+
     }
 }

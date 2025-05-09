@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using mvc.IRepository;
 using mvc.Models;
 
@@ -35,6 +36,16 @@ namespace mvc.Services
         public async Task DeleteAssignmentAsync(int id)
         {
             await _assignmentRepository.DeleteAssignmentAsync(id);
+        }
+
+        public async Task<IEnumerable<Assignment>> GetAssignmentsByClassroomIdAsync(int classroomId)
+        {
+            return await _assignmentRepository.GetAssignmentsByClassroomIdAsync(classroomId);
+        }
+
+        public async Task<IEnumerable<AssignmentChat>> GetAssignmentChatsByAssignmentIdAsync(int assignmentId)
+        {
+            return await _assignmentRepository.GetAssignmentChatsByAssignmentIdAsync(assignmentId);
         }
     }
 }

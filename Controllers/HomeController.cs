@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,13 +17,25 @@ namespace mvc.Controllers
         private readonly IUserService _userService;
         private readonly UserManager<UserAccount> _userManager;
         private readonly IAccountService _accountService;
+        private readonly IClassroomStudentsService _classroomStudentsService;
+        private readonly IAssignmentService _assignmentService;
+        private readonly IDocumentService _documentService;
 
-        public HomeController(IUserService userService, UserManager<UserAccount> userManager, IAccountService accountService) : base(userManager)
-        {
+        public HomeController(
+        IUserService userService, 
+        UserManager<UserAccount> userManager, 
+        IAccountService accountService, 
+        IClassroomStudentsService classroomStudentsService,
+        IAssignmentService assignmentService,
+        IDocumentService documentService) : base(userManager)
+        {   
             _userService = userService;
             _userManager = userManager;
             _accountService = accountService;
-        }
+            _classroomStudentsService = classroomStudentsService;
+            _assignmentService = assignmentService;
+            _documentService = documentService;
+        }   
 
         public IActionResult Index()
         {
@@ -34,17 +47,6 @@ namespace mvc.Controllers
         {
             ViewData["Title"] = "AccessDenied";
             return View();
-        }
-        public async Task<IActionResult> User()
-        {
-            ViewData["Title"] = "User";
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            if (user == null)
-            {
-                return RedirectToAction("Login", "Account");
-            }
-
-            return View(user);
         }
 
         // GET: UserSettings/5
@@ -62,6 +64,27 @@ namespace mvc.Controllers
             }
 
             return View(user);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetProfilePhoto([FromBody] string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return BadRequest(new { error = "User ID cannot be null or empty." });
+            }
+
+            var user = await _userService.GetUserByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound(new { error = "User not found." });
+            }
+
+            // Reset the profile photo to the default path
+            user.profilePhoto = "/images/default.png";
+
+            await _userService.UpdateUserAsync(user);
+            return RedirectToAction(nameof(User));
         }
 
         // POST: UserSettings/5
@@ -117,7 +140,7 @@ namespace mvc.Controllers
             }
 
             // Handle profile photo upload if a new file is provided
-            if (profilePhotoFile != null && profilePhotoFile.Length > 0)
+            else if (profilePhotoFile != null && profilePhotoFile.Length > 0)
             {
                 const long maxFileSize = 5 * 1024 * 1024; // 5MB
                 var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
@@ -130,7 +153,7 @@ namespace mvc.Controllers
 
                 if (!allowedExtensions.Contains(fileExtension))
                 {
-                    ModelState.AddModelError("photoPathFile", "Only JPG, JPEG, and PNG files are allowed.");
+                    ModelState.AddModelError("profilePhotoFile", "Only JPG, JPEG, and PNG files are allowed.");
                 }
 
                 if (ModelState.IsValid)
@@ -146,7 +169,7 @@ namespace mvc.Controllers
                         await profilePhotoFile.CopyToAsync(stream);
                     }
 
-                    if (!string.IsNullOrEmpty(existingUser.profilePhoto))
+                    if (!string.IsNullOrEmpty(existingUser.profilePhoto) && existingUser.profilePhoto != "/images/default.png")
                     {
                         var oldFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", existingUser.profilePhoto.TrimStart('/'));
                         if (System.IO.File.Exists(oldFilePath))
@@ -175,5 +198,135 @@ namespace mvc.Controllers
                 return View(existingUser);
             }
         }
+
+        // Store the User ID in the session when the user logs in or is authenticated
+        public async Task<IActionResult> User()
+        {
+            ViewData["Title"] = "User";
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            // Store the User ID in the session
+            HttpContext.Session.SetString("UserId", user.Id);
+
+            return View(user);
+        }
+
+        public async Task<IActionResult> Home()
+        {
+            var id = HttpContext.Session.GetString("UserId");
+
+            if (string.IsNullOrEmpty(id))
+            {
+                var user = await _userManager.GetUserAsync(HttpContext.User);
+                if (user != null)
+                {
+                    id = user.Id;
+                    HttpContext.Session.SetString("UserId", id);
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+            }
+
+            if (string.IsNullOrEmpty(id))
+            {
+                return BadRequest("User ID cannot be null or empty.");
+            }
+
+            var existingUser = await _userService.GetUserByIdAsync(id);
+            if (existingUser == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            var classrooms = await _classroomStudentsService.GetClassroomsByUserIdAsync(id);
+            var classroomViewModels = new List<ClassroomViewModel>();
+
+            foreach (var classroom in classrooms)
+            {
+                if (!string.IsNullOrEmpty(classroom.professorId))
+                {
+                    var professor = await _userService.GetUserByIdAsync(classroom.professorId);
+                    classroomViewModels.Add(new ClassroomViewModel
+                    {
+                        Classroom = classroom,
+                        ProfessorName = professor?.UserName,
+                        ProfessorPhoto = professor?.profilePhoto
+                    });
+                }
+            }
+
+            var viewModel = new UserClassroomsViewModel
+            {
+                UserAccount = existingUser,
+                Classrooms = classroomViewModels // Pass the populated classroomViewModels
+            };
+
+            return View(viewModel);
+        }
+
+        public async Task<IActionResult> ClassroomFlux(int id)
+        {
+            // Retrieve the user from the current context or session
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            string userId = user?.Id ?? HttpContext.Session.GetString("UserId");
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return BadRequest("User ID cannot be null or empty.");
+            }
+
+            // Retrieve the current user using the user service
+            var userAccount = await _userService.GetUserByIdAsync(userId);
+            if (userAccount == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            // Retrieve the classroom with the given ID
+            var classroom = await _classroomStudentsService.GetClassroomByIdAsync(id);
+            if (classroom == null)
+            {
+                return NotFound("Classroom not found.");
+            }
+
+            // Retrieve assignments for the classroom
+            var assignments = await _assignmentService.GetAssignmentsByClassroomIdAsync(id);
+
+            // Retrieve assignment chats for each assignment in the classroom
+            var assignmentChats = new List<AssignmentChat>();
+            foreach (var assignment in assignments)
+            {
+                var chats = await _assignmentService.GetAssignmentChatsByAssignmentIdAsync(assignment.id);
+                assignmentChats.AddRange(chats);
+            }
+
+            // Retrieve documents for each assignment in the classroom
+            var documents = new List<Document>();
+            foreach (var assignment in assignments)
+            {
+                var assignmentDocuments = await _documentService.GetDocumentsByAssignmentIdAsync(assignment.id);
+                documents.AddRange(assignmentDocuments);
+            }
+
+            // Populate the ClassroomFluxViewModel
+            var viewModel = new ClassroomFluxViewModel
+            {
+                Classroom = classroom,
+                Assignments = assignments.ToList(),
+                AssignmentChats = assignmentChats.ToList(),
+                Documents = documents.ToList(),
+                UserAccount = userAccount,
+                Users = (await _userService.GetAllUsersAsync()).ToList()
+            };
+
+            return View(viewModel);
+        }
+
     }
 }

@@ -1,5 +1,6 @@
 using mvc.IRepository;
 using mvc.Models;
+using NuGet.Protocol.Core.Types;
 
 namespace mvc.Services
 {
@@ -35,6 +36,21 @@ namespace mvc.Services
         public async Task DeleteClassroomStudentAsync(int id)
         {
             await _classroomStudentsRepository.DeleteClassroomStudentAsync(id);
+        }
+
+        public async Task<List<Classroom>> GetClassroomsByUserIdAsync(string userId)
+        {
+            return (await _classroomStudentsRepository.GetClassroomsByUserIdAsync(userId)).ToList();
+        }
+
+        public async Task<Classroom?> GetClassroomByIdAsync(int id)
+        {
+            return await _classroomStudentsRepository.GetClassroomByIdAsync(id);
+        }
+
+        public async Task<ClassroomStudents?> GetClassroomStudentByIdAsync(int classroomId, string userId)
+        {
+            return await _classroomStudentsRepository.GetClassroomStudentByIdAsync(classroomId, userId);
         }
     }
 }

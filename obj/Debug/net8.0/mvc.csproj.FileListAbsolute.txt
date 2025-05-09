@@ -1227,3 +1227,4 @@ D:\Facultate\Anul III\Sem II\Proiect IS\mvc dev 2\mvc\obj\Debug\net8.0\staticweb
 D:\Facultate\Anul III\Sem II\Proiect IS\mvc dev 2\mvc\obj\Debug\net8.0\mvc.csproj.Up2Date
 D:\Facultate\Anul III\Sem II\Proiect IS\mvc dev 2\mvc\obj\Debug\net8.0\mvc.genruntimeconfig.cache
 D:\Facultate\Anul III\Sem II\Proiect IS\mvc dev 2\mvc\obj\Debug\net8.0\ref\mvc.dll
+D:\Facultate\Anul III\Sem II\Proiect IS\mvc dev 2\mvc\obj\Debug\net8.0\mvc.sourcelink.json

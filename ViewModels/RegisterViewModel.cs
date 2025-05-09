@@ -25,6 +25,6 @@ namespace mvc.ViewModels
         public string githubLink { get; set; } = "-";
         public bool notificationSettings { get; set; } = true;
         public string PhoneNumber { get; set; } = "-";
-        public string profilePhoto { get; set; } = "/uploads/users/default.png";
+        public string profilePhoto { get; set; } = "/images/default.png";
     }
 }

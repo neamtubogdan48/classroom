@@ -99,5 +99,30 @@ namespace mvc.Controllers
             await _classroomStudentsService.DeleteClassroomStudentAsync(id);
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LeaveClassroom(int id)
+        {
+            // Retrieve the current user's ID from the session
+            var userId = HttpContext.Session.GetString("UserId");
+            if (string.IsNullOrEmpty(userId))
+            {
+                return BadRequest("User ID cannot be null or empty.");
+            }
+
+            // Check if the user is part of the classroom
+            var classroomStudent = await _classroomStudentsService.GetClassroomStudentByIdAsync(id, userId);
+            if (classroomStudent == null)
+            {
+                return NotFound("User is not part of this classroom.");
+            }
+
+            // Remove the user from the classroom
+            await _classroomStudentsService.DeleteClassroomStudentAsync(classroomStudent.id);
+
+            // Redirect back to the home page or classroom list
+            return RedirectToAction("Home", "Home");
+        }
     }
 }

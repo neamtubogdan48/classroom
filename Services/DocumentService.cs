@@ -36,5 +36,10 @@ namespace mvc.Services
         {
             await _documentRepository.DeleteDocumentAsync(id);
         }
+
+        public async Task<IEnumerable<Document>> GetDocumentsByAssignmentIdAsync(int assignmentId)
+        {
+            return await _documentRepository.GetDocumentsByAssignmentIdAsync(assignmentId);
+        }
     }
 }

@@ -4,36 +4,35 @@
     ViewData["Title"] = "Edit";
 }
 
-<link rel="stylesheet" href="~/css/usersCRUD.css" asp-append-version="true" />
-<link rel="stylesheet" href="~/css/default.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/flux.css" asp-append-version="true" />
 
 <h1 class="centerDiv">Edit</h1>
 
 <div class="centerDiv">
-    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <form asp-action="Edit" method="post" enctype="multipart/form-data" class="teacher-form">
         <input type="hidden" asp-for="id" />
         <div>
-            <label asp-for="name" class="control-label"></label>
-            <input asp-for="name" class="form-control" />
+            <label asp-for="name">🎯 Assignment Title</label>
+            <input asp-for="name" class="form-control" placeholder="e.g. Assignment 1 - Sorting Algorithms" />
             <span asp-validation-for="name" class="text-danger"></span>
         </div>
         <div>
-            <label asp-for="description" class="control-label"></label>
-            <input asp-for="description" class="form-control" />
+            <label asp-for="description">📝 Description</label>
+            <textarea asp-for="description" class="form-control" rows="3" placeholder="e.g. Implement at least 2 sorting algorithms..."></textarea>
             <span asp-validation-for="description" class="text-danger"></span>
         </div>
         <div>
-            <label asp-for="deadline" class="control-label"></label>
+            <label asp-for="deadline">⏰ Deadline</label>
             <input asp-for="deadline" class="form-control" type="datetime-local" />
             <span asp-validation-for="deadline" class="text-danger"></span>
         </div>
         <div>
-            <label for="requirementsDocFile" class="control-label">Upload Document</label>
+            <label for="requirementsDocFile">📎 Attach File</label>
             <input type="file" name="requirementsDocFile" id="requirementsDocFile" class="form-control" />
             <span class="text-danger">@ViewData["FileUploadError"]</span>
         </div>
         <div>
-            <label asp-for="lateTurnInOption" class="control-label"></label>
+            <label asp-for="lateTurnInOption">Allow Late Turn-In</label>
             <select asp-for="lateTurnInOption" class="form-control">
                 <option value="true">True</option>
                 <option value="false">False</option>
@@ -41,18 +40,14 @@
             <span asp-validation-for="lateTurnInOption" class="text-danger"></span>
         </div>
         <div>
-            <label asp-for="noDeadlineOption" class="control-label"></label>
+            <label asp-for="noDeadlineOption">No Deadline Option</label>
             <select asp-for="noDeadlineOption" class="form-control">
                 <option value="true">True</option>
                 <option value="false">False</option>
             </select>
             <span asp-validation-for="noDeadlineOption" class="text-danger"></span>
         </div>
-        <div>
-            <label asp-for="classroomId" class="control-label"></label>
-            <input asp-for="classroomId" class="form-control" />
-            <span asp-validation-for="classroomId" class="text-danger"></span>
-        </div>
+        <input type="hidden" asp-for="classroomId" />
         <div class="centerDiv">
             <input type="submit" value="Save" class="btn" />
         </div>

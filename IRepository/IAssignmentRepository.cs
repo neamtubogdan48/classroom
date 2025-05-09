@@ -9,5 +9,7 @@ namespace mvc.IRepository
         Task AddAssignmentAsync(Assignment assignment);
         Task UpdateAssignmentAsync(Assignment assignment);
         Task DeleteAssignmentAsync(int id);
+        Task<IEnumerable<Assignment>> GetAssignmentsByClassroomIdAsync(int classroomId);
+        Task<IEnumerable<AssignmentChat>> GetAssignmentChatsByAssignmentIdAsync(int assignmentId);
     }
 }

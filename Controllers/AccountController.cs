@@ -34,7 +34,7 @@ public class AccountController : Controller
             return View(model);
         }
 
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Home", "Home");
     }
 
     public IActionResult Register()
@@ -68,7 +68,8 @@ public class AccountController : Controller
 
     public async Task<IActionResult> Logout()
     {
+        HttpContext.Session.Clear();
         await _accountService.LogoutAsync();
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Home", "Home");
     }
 }

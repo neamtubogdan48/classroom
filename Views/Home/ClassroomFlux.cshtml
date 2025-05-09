@@ -1,0 +1,168 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@model mvc.ViewModels.ClassroomFluxViewModel
+
+@{
+    ViewData["Title"] = "ClassroomFlux";
+}
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Classroom Assignment</title>
+    <link rel="stylesheet" href="~/css/flux.css">
+</head>
+<body>
+    <header style="background-image: url('@Url.Content(Model.Classroom.photo)'); background-size: cover; background-position: center;">
+        <div class="container">
+            <h1>📘 @Model.Classroom.name</h1>
+            <p>Class code: <span class="badge">@Model.Classroom.code</span></p>
+        </div>
+    </header>
+
+    <main class="container">
+        @if (Model.UserAccount?.accountType == "Professor" || Model.UserAccount?.accountType == "Admin")
+        {
+            <!-- Teacher Section -->
+            <section class="card card-teacher">
+                <h2>👨‍🏫 Teacher: Post a New Assignment</h2>
+                <form asp-controller = "Assignment" asp-action="Create" method="post" enctype="multipart/form-data" class="teacher-form">
+                    <div>
+                        <label asp-for="name">🎯 Assignment Title</label>
+                        <input asp-for="name" class="form-control" placeholder="ex: Tema 1 - Algoritmi de sortare" />
+                        <span asp-validation-for="name" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="description">📝 Description</label>
+                        <textarea asp-for="description" class="form-control" rows="3" placeholder="ex: Implementati doi algoritmi de sortare..."></textarea>
+                        <span asp-validation-for="description" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="deadline">⏰ Deadline</label>
+                        <input asp-for="deadline" class="form-control" type="datetime-local"
+                               value="@((Model.deadline != DateTime.MinValue) ? Model.deadline.ToString("yyyy-MM-ddTHH:mm") : "")" />
+                        <span asp-validation-for="deadline" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label for="requirementsDocFile">📎 Attach File</label>
+                        <input type="file" name="requirementsDocFile" id="requirementsDocFile" class="form-control" />
+                        <span class="text-danger">@ViewData["FileUploadError"]</span>
+                    </div>
+                    <div>
+                        <label asp-for="lateTurnInOption">⏰ Allow Late Turn-In</label>
+                        <select asp-for="lateTurnInOption" class="form-control custom-select">
+                            <option value="true" class="custom-option">True</option>
+                            <option value="false" class="custom-option">False</option>
+                        </select>
+                        <span asp-validation-for="lateTurnInOption" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="noDeadlineOption">📅 No Deadline Option</label>
+                        <select asp-for="noDeadlineOption" class="form-control custom-select">
+                            <option value="true" class="custom-option">True</option>
+                            <option value="false" class="custom-option">False</option>
+                        </select>
+                        <span asp-validation-for="noDeadlineOption" class="text-danger"></span>
+                    </div>
+                    <input type="hidden" asp-for="classroomId" value="@Model.Classroom.id"/>
+                    <div class="centerDiv">
+                        <input type="submit" value="📢 Publish Assignment" class="btn neon" />
+                    </div>
+                </form>
+            </section>
+
+        }
+        @foreach (var assignment in Model.Assignments.Where(a => a.classroomId == Model.Classroom.id))
+        {
+            <!-- Student Section -->
+            <section class="card card-student">
+                <div class="assignment-header">
+                    <h2>📄 Assignment:@assignment.name</h2>
+                    @if(!@assignment.noDeadlineOption)
+                    {
+                        <p><strong>📆 Deadline:</strong> @assignment.deadline.ToString("yyyy-MM-dd HH:mm")</p>
+                    }
+                    @if ((@Model.Documents.FirstOrDefault(d => d.userId == HttpContextAccessor.HttpContext.Session.GetString("UserId") && d.assignmentId == assignment.id)?.grade ?? 0) != 0)
+                    {
+                        <p>
+                            <strong>
+                                🏁 Grade:
+                                @Model.Documents.FirstOrDefault(d => d.userId == HttpContextAccessor.HttpContext.Session.GetString("UserId") && d.assignmentId == assignment.id)?.grade
+                            </strong>
+                        </p>
+                    }
+                </div>
+                <p class="assignment-desc">@assignment.description</p>
+                @if ((DateTime.Now < assignment.deadline || assignment.lateTurnInOption) && !Model.Documents.Any(d => d.userId == HttpContextAccessor.HttpContext.Session.GetString("UserId") && d.assignmentId == assignment.id) && Model.UserAccount.accountType == "Student")
+                {
+                    <div class="upload-section">
+                        <form asp-controller="Document" asp-action="Create" method="post" enctype="multipart/form-data">
+                            <label class="upload-label" for="file-upload">📤 Upload your work:</label>
+                            <input asp-for="studentDocFile" type="file" id="file-upload" class="form-control" required />
+                            <input asp-for="userId" type="hidden" value="@HttpContextAccessor.HttpContext.Session.GetString("UserId")" />
+                            <input asp-for="assignmentId" type="hidden" value="@assignment.id" />
+                            <input asp-for="grade" type="hidden" value="0" />
+                            <button type="submit" class="btn gradient">✅ Submit</button>
+                        </form>
+                    </div>
+                }
+                else if (DateTime.Now > assignment.deadline && !Model.Documents.Any(d => d.userId == HttpContextAccessor.HttpContext.Session.GetString("UserId") && d.assignmentId == assignment.id) && Model.UserAccount.accountType == "Student")
+                {
+                    <div class="upload-section">
+                        <a class="btn gradient">❌ Deadline expired</a>
+                    </div>
+                }
+                else if (Model.UserAccount.accountType == "Student")
+                {
+                    <div class="upload-section">
+                        <h2>
+                            📄 Upload:
+                            <a href="@Url.Content(Model.Documents.FirstOrDefault(d => d.userId == HttpContextAccessor.HttpContext.Session.GetString("UserId") && d.assignmentId == assignment.id)?.studentDoc ?? "#")" target="_blank">
+                                Open Document
+                            </a>
+                        </h2>
+                        <form asp-controller="Document" asp-action="Delete" method="post">
+                            <input type="hidden" name="id" value="@Model.Documents.FirstOrDefault(d => d.userId == HttpContextAccessor.HttpContext.Session.GetString("UserId") && d.assignmentId == assignment.id)?.id" />
+                            <button type="submit" class="btn gradient">❌ Withdraw file</button>
+                        </form>
+                    </div>
+                }
+                @if(@Model.UserAccount.accountType != "Student") {
+                    <div class="edit-section">
+                        <a asp-controller="Assignment" asp-action="Edit" asp-route-id="@assignment.id" class="btn gradient">✏️ Edit assignment</a>
+                    <form asp-controller="Assignment" asp-action="Delete" asp-route-id="@assignment.id">
+                        <input type="hidden" asp-for="@assignment.id" />
+                        <input type="submit" value="❌ Delete assignment" class="btn gradient" />
+                    </form>
+                    </div>
+                }
+                <div class="comments">
+                    <h3>💬 Comments</h3>
+                    @foreach (var comment in Model.AssignmentChats.Where(c => c.assignmentId == assignment.id))
+                    {
+                        <div class="comment">
+                            <strong>@Model.Users.FirstOrDefault(u => u.Id == comment.userId)?.UserName:</strong> @comment.message
+
+                            @if (Model.UserAccount?.accountType != "Student" || Model.UserAccount.Id == @comment.userId) 
+                            {
+                                <form asp-controller="AssignmentChat" asp-action="Delete" asp-route-id="@comment.id" method="post" class="inline-form">
+                                    <button type="submit" class="btn gradient">❌ Delete</button>
+                                </form>
+                            }
+                        </div>
+                    }
+                    <form asp-controller="AssignmentChat" asp-action="Create" method="post">
+                        <input type="hidden" name="assignmentId" value="@assignment.id" />
+                        <input type="hidden" name="userId" value="@HttpContextAccessor.HttpContext.Session.GetString("UserId")" />
+                        <input type="hidden" name="studentId" value="@HttpContextAccessor.HttpContext.Session.GetString("UserId")" />
+                        <input type="text" name="message" placeholder="💬 Write a comment..." class="form-control" />
+                        <button type="submit" class="btn gradient">Send</button>
+                    </form>
+                </div>
+        </section>
+        }
+    </main>
+</body>
+</html>
+

@@ -109,7 +109,7 @@ namespace mvc.Controllers
         // POST: Classroom/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,name,code,professorId")] Classroom classroom, IFormFile photoFile)
+        public async Task<IActionResult> Edit(int id, [Bind("id,name,code,professorId")] Classroom classroom, IFormFile? photoFile)
         {
             if (id != classroom.id)
             {
@@ -121,6 +121,22 @@ namespace mvc.Controllers
             if (existingClassroom == null)
             {
                 return NotFound();
+            }
+
+            // Update only the fields that are provided or changed
+            if (!string.IsNullOrEmpty(classroom.name) && classroom.name != existingClassroom.name)
+            {
+                existingClassroom.name = classroom.name;
+            }
+
+            if (classroom.code != default && classroom.code != existingClassroom.code)
+            {
+                existingClassroom.code = classroom.code;
+            }
+
+            if (!string.IsNullOrEmpty(classroom.professorId) && classroom.professorId != existingClassroom.professorId)
+            {
+                existingClassroom.professorId = classroom.professorId;
             }
 
             if (photoFile != null && photoFile.Length > 0)
@@ -167,18 +183,18 @@ namespace mvc.Controllers
                     }
 
                     // Update the file path in the photo property
-                    classroom.photo = $"/uploads/classrooms/{uniqueFileName}";
+                    existingClassroom.photo = $"/uploads/classrooms/{uniqueFileName}";
                 }
             }
             else
             {
-                // Retain the existing file path if no new file is uploaded
-                classroom.photo = existingClassroom.photo;
+                // Retain the existing photo if no new file is uploaded
+                existingClassroom.photo = existingClassroom.photo;
             }
 
             if (ModelState.IsValid)
             {
-                await _classroomService.UpdateClassroomAsync(classroom);
+                await _classroomService.UpdateClassroomAsync(existingClassroom);
                 return RedirectToAction(nameof(Index));
             }
 
@@ -221,6 +237,27 @@ namespace mvc.Controllers
 
             // Proceed to delete the classroom
             await _classroomService.DeleteClassroomAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetCode(int id)
+        {
+            // Retrieve the existing classroom
+            var existingClassroom = await _classroomService.GetClassroomByIdAsync(id);
+            if (existingClassroom == null)
+            {
+                return NotFound();
+            }
+
+            // Generate a random number for the code
+            var random = new Random();
+            existingClassroom.code = random.Next(100000, 999999); // Generate a 6-digit random number
+
+            // Update the classroom in the database
+            await _classroomService.UpdateClassroomAsync(existingClassroom);
+
             return RedirectToAction(nameof(Index));
         }
     }
