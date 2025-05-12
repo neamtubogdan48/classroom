@@ -9,5 +9,6 @@ namespace mvc.Services
         Task AddNotificationAsync(Notification notification);
         Task UpdateNotificationAsync(Notification notification);
         Task DeleteNotificationAsync(int id);
+        Task<List<Notification>> GetNotificationsByUserIdAsync(string userId);
     }
 }

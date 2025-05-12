@@ -1,0 +1,95 @@
+﻿@model mvc.ViewModels.UserNotificationsViewModel
+
+@{
+    ViewData["Title"] = "UserProfile";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>User Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/notifications.css" asp-append-version="true">
+    <style type="text/css">
+        body {
+            margin-top: 20px;
+            background: #f8f8f8
+        }
+    </style>
+</head>
+<body>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="container">
+        <div class="row flex-lg-nowrap">
+            <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
+                <div class="card p-3">
+                    <div class="e-navlist e-navlist--active-bg">
+                        <ul class="nav">
+                            <li class="nav-item"><a class="nav-link px-2" asp-action="Home" target="__blank"><i class="fa fa-fw fa-home mr-1"></i><span>Dashboard</span></a></li>
+                            <li class="nav-item"><a class="nav-link px-2" asp-action="UserProfile" target="__blank"><i class="fa fa-fw fa-cog mr-1"></i><span>Settings</span></a></li>
+                            <li class="nav-item"><a class="nav-link px-2" asp-action="Notifications" target="__blank"><i class="fa fa-fw fa-bell mr-1"></i><span>Alerts</span></a></li>
+                            @if (Model.UserAccount.accountType == "Admin")
+                            {
+                                <li class="nav-item"><a class="nav-link px-2" asp-action="Controllers" target="__blank"><i class="fa fa-fw fa-th mr-1"></i><span>CRUD</span></a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="container notifications-container">
+                                    <h1 class="notifications-title">Your Notifications</h1>
+                                    <ul class="notifications-list">
+                                        @foreach (var notification in Model.Notifications)
+                                        {
+                                            <li class="notification-item">
+                                                <div class="notification-content">
+                                                    <div class="notification-thumb">
+                                                        <img src="https://i.pinimg.com/564x/f2/58/4f/f2584f450c74bee72c123c4184c58df7.jpg" alt="bell">
+                                                    </div>
+                                                    <div class="notification-details">
+                                                        <div class="notification-header">
+                                                            <a href="mail-single.html" class="notification-name">@notification.name</a>
+                                                            <span class="notification-time">@notification.timeSent.ToString("yyyy-MM-dd HH:mm")</span>
+                                                        </div>
+                                                        <p class="notification-description">@notification.description</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 mb-3">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="px-xl-3">
+                                    <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                                        <button type="submit" class="btn btn-block btn-secondary">
+                                            <i class="fa fa-sign-out"></i>
+                                            <span>Logout</span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

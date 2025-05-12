@@ -98,6 +98,10 @@ textarea {
 
 .edit-section {
     margin-top: 15px;
+    display: flex; /* Use Flexbox to arrange elements in a row */
+    flex-direction: row; /* Ensure elements are aligned horizontally */
+    gap: 10px; /* Add spacing between elements */
+    align-items: center; /* Align items vertically in the center */
 }
 
     .edit-section .btn {
@@ -188,7 +192,7 @@ textarea {
     width: 100%;
 }
 
-.upload-section .btn.gradient {
+.withdraw-section .btn.gradient {
     pointer-events: none; /* Disable hover and click interactions */
     transform: none; /* Remove any transform effects */
     box-shadow: none; /* Remove hover shadow */
@@ -226,3 +230,18 @@ textarea {
         color: #000;
     }
 
+.classroomList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* Style for the assignment description */
+.assignment-desc {
+    margin-top: 10px; /* Add space above the description */
+    margin-bottom: 10px; /* Add space below the description */
+    font-size: 1.2rem; /* Increase the font size */
+    line-height: 1.5; /* Improve readability with better line spacing */
+}

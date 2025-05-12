@@ -12,5 +12,8 @@ namespace mvc.Services
         Task<List<Classroom>> GetClassroomsByUserIdAsync(string userId);
         Task<Classroom?> GetClassroomByIdAsync(int id);
         Task<ClassroomStudents?> GetClassroomStudentByIdAsync(int classroomId, string userId);
+        Task RemoveClassroomStudentAsync(int id);
+        Task<List<ClassroomStudents>> GetClassroomStudentsByAssignmentIdAsync(int assignmentId);
+        Task<ClassroomStudents?> GetClassroomStudentByUserAndClassroomAsync(string userId, int classroomId);
     }
 }

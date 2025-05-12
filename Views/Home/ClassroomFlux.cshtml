@@ -22,6 +22,9 @@
     </header>
 
     <main class="container">
+        <div class="classroomList">
+            <a asp-controller = "ClassroomStudents" asp-action= "ClassroomList" asp-route-id ="@Model.Classroom.id" class="btn gradient">Show student list</a>
+        </div>
         @if (Model.UserAccount?.accountType == "Professor" || Model.UserAccount?.accountType == "Admin")
         {
             <!-- Teacher Section -->
@@ -94,6 +97,8 @@
                     }
                 </div>
                 <p class="assignment-desc">@assignment.description</p>
+				<a href="@Url.Content(assignment.requirementsDoc ?? "#")" download>
+                    <h3 class="assignment-desc">📎 Download requirements</h3>
                 @if ((DateTime.Now < assignment.deadline || assignment.lateTurnInOption) && !Model.Documents.Any(d => d.userId == HttpContextAccessor.HttpContext.Session.GetString("UserId") && d.assignmentId == assignment.id) && Model.UserAccount.accountType == "Student")
                 {
                     <div class="upload-section">
@@ -109,7 +114,7 @@
                 }
                 else if (DateTime.Now > assignment.deadline && !Model.Documents.Any(d => d.userId == HttpContextAccessor.HttpContext.Session.GetString("UserId") && d.assignmentId == assignment.id) && Model.UserAccount.accountType == "Student")
                 {
-                    <div class="upload-section">
+                    <div class="withdraw-section">
                         <a class="btn gradient">❌ Deadline expired</a>
                     </div>
                 }
@@ -118,8 +123,8 @@
                     <div class="upload-section">
                         <h2>
                             📄 Upload:
-                            <a href="@Url.Content(Model.Documents.FirstOrDefault(d => d.userId == HttpContextAccessor.HttpContext.Session.GetString("UserId") && d.assignmentId == assignment.id)?.studentDoc ?? "#")" target="_blank">
-                                Open Document
+                            <a href="@Url.Content(Model.Documents.FirstOrDefault(d => d.userId == HttpContextAccessor.HttpContext.Session.GetString("UserId") && d.assignmentId == assignment.id)?.studentDoc ?? "#")" download>
+									Download your file
                             </a>
                         </h2>
                         <form asp-controller="Document" asp-action="Delete" method="post">
@@ -130,6 +135,7 @@
                 }
                 @if(@Model.UserAccount.accountType != "Student") {
                     <div class="edit-section">
+                        <a asp-controller="Document" asp-action="UploadList" asp-route-id="@assignment.id" class="btn gradient">🗃️ Show uploads</a>
                         <a asp-controller="Assignment" asp-action="Edit" asp-route-id="@assignment.id" class="btn gradient">✏️ Edit assignment</a>
                     <form asp-controller="Assignment" asp-action="Delete" asp-route-id="@assignment.id">
                         <input type="hidden" asp-for="@assignment.id" />

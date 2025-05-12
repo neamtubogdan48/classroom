@@ -20,6 +20,8 @@ namespace mvc.Controllers
         private readonly IClassroomStudentsService _classroomStudentsService;
         private readonly IAssignmentService _assignmentService;
         private readonly IDocumentService _documentService;
+        private readonly IClassroomService _classroomService;
+        private readonly INotificationService _notificationService;
 
         public HomeController(
         IUserService userService, 
@@ -27,7 +29,9 @@ namespace mvc.Controllers
         IAccountService accountService, 
         IClassroomStudentsService classroomStudentsService,
         IAssignmentService assignmentService,
-        IDocumentService documentService) : base(userManager)
+        IDocumentService documentService,
+        IClassroomService classroomService,
+        INotificationService notificationService) : base(userManager)
         {   
             _userService = userService;
             _userManager = userManager;
@@ -35,182 +39,23 @@ namespace mvc.Controllers
             _classroomStudentsService = classroomStudentsService;
             _assignmentService = assignmentService;
             _documentService = documentService;
+            _classroomService = classroomService;
+            _notificationService = notificationService;
         }   
-
-        public IActionResult Index()
-        {
-            ViewData["Title"] = "Index"; // Set the ViewData["Title"]
-            return View();
-        }
 
         public IActionResult AccessDenied()
         {
             ViewData["Title"] = "AccessDenied";
             return View();
         }
-
-        // GET: UserSettings/5
-        public async Task<IActionResult> UserSettings(string id)
+        public async Task<IActionResult> Controllers()
         {
-            if (string.IsNullOrEmpty(id))
-            {
-                return BadRequest("User ID cannot be null or empty.");
-            }
-
-            var user = await _userService.GetUserByIdAsync(id);
-            if (user == null)
-            {
-                return NotFound("User not found.");
-            }
-
-            return View(user);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> ResetProfilePhoto([FromBody] string id)
-        {
-            if (string.IsNullOrEmpty(id))
-            {
-                return BadRequest(new { error = "User ID cannot be null or empty." });
-            }
-
-            var user = await _userService.GetUserByIdAsync(id);
-            if (user == null)
-            {
-                return NotFound(new { error = "User not found." });
-            }
-
-            // Reset the profile photo to the default path
-            user.profilePhoto = "/images/default.png";
-
-            await _userService.UpdateUserAsync(user);
-            return RedirectToAction(nameof(User));
-        }
-
-        // POST: UserSettings/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UserSettings(string id, [Bind("Id,UserName,Email,PasswordHash,accountType,PhoneNumber,githubLink,notificationSettings")] UserAccount user, IFormFile? profilePhotoFile)
-        {
-            if (string.IsNullOrEmpty(id) || id != user.Id)
-            {
-                return BadRequest("User ID mismatch or missing.");
-            }
-
-            var existingUser = await _userService.GetUserByIdAsync(id);
-            if (existingUser == null)
-            {
-                return NotFound("User not found.");
-            }
-
-            // Update only the fields that are changed
-            if (!string.IsNullOrEmpty(user.UserName) && user.UserName != existingUser.UserName)
-            {
-                existingUser.UserName = user.UserName;
-            }
-
-            if (!string.IsNullOrEmpty(user.Email) && user.Email != existingUser.Email)
-            {
-                existingUser.Email = user.Email;
-            }
-
-            if (!string.IsNullOrEmpty(user.PasswordHash) && user.PasswordHash != existingUser.PasswordHash)
-            {
-                existingUser.PasswordHash = user.PasswordHash;
-            }
-
-            if (!string.IsNullOrEmpty(user.PhoneNumber) && user.PhoneNumber != existingUser.PhoneNumber)
-            {
-                existingUser.PhoneNumber = user.PhoneNumber;
-            }
-
-            if (!string.IsNullOrEmpty(user.githubLink) && user.githubLink != existingUser.githubLink)
-            {
-                existingUser.githubLink = user.githubLink;
-            }
-
-            if (user.notificationSettings != existingUser.notificationSettings)
-            {
-                existingUser.notificationSettings = user.notificationSettings;
-            }
-
-            if (!string.IsNullOrEmpty(user.accountType) && user.accountType != existingUser.accountType)
-            {
-                existingUser.accountType = user.accountType;
-            }
-
-            // Handle profile photo upload if a new file is provided
-            else if (profilePhotoFile != null && profilePhotoFile.Length > 0)
-            {
-                const long maxFileSize = 5 * 1024 * 1024; // 5MB
-                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
-                var fileExtension = Path.GetExtension(profilePhotoFile.FileName).ToLower();
-
-                if (profilePhotoFile.Length > maxFileSize)
-                {
-                    ModelState.AddModelError("profilePhotoFile", "The file size cannot exceed 5MB.");
-                }
-
-                if (!allowedExtensions.Contains(fileExtension))
-                {
-                    ModelState.AddModelError("profilePhotoFile", "Only JPG, JPEG, and PNG files are allowed.");
-                }
-
-                if (ModelState.IsValid)
-                {
-                    var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/users");
-                    Directory.CreateDirectory(uploadsFolder);
-
-                    var uniqueFileName = Guid.NewGuid().ToString() + fileExtension;
-                    var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await profilePhotoFile.CopyToAsync(stream);
-                    }
-
-                    if (!string.IsNullOrEmpty(existingUser.profilePhoto) && existingUser.profilePhoto != "/images/default.png")
-                    {
-                        var oldFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", existingUser.profilePhoto.TrimStart('/'));
-                        if (System.IO.File.Exists(oldFilePath))
-                        {
-                            System.IO.File.Delete(oldFilePath);
-                        }
-                    }
-
-                    existingUser.profilePhoto = $"/uploads/users/{uniqueFileName}";
-                }
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return View(existingUser);
-            }
-
-            try
-            {
-                await _userService.UpdateUserAsync(existingUser);
-                return RedirectToAction(nameof(User));
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, ex.Message);
-                return View(existingUser);
-            }
-        }
-
-        // Store the User ID in the session when the user logs in or is authenticated
-        public async Task<IActionResult> User()
-        {
-            ViewData["Title"] = "User";
+            ViewData["Title"] = "Controllers";
             var user = await _userManager.GetUserAsync(HttpContext.User);
             if (user == null)
             {
                 return RedirectToAction("Login", "Account");
             }
-
-            // Store the User ID in the session
-            HttpContext.Session.SetString("UserId", user.Id);
 
             return View(user);
         }
@@ -226,6 +71,7 @@ namespace mvc.Controllers
                 {
                     id = user.Id;
                     HttpContext.Session.SetString("UserId", id);
+                    HttpContext.Session.SetString("AccountType", user.accountType);
                 }
                 else
                 {
@@ -245,29 +91,19 @@ namespace mvc.Controllers
             }
 
             var classrooms = await _classroomStudentsService.GetClassroomsByUserIdAsync(id);
-            var classroomViewModels = new List<ClassroomViewModel>();
+            var classroomViewModels = await _classroomService.MapClassroomsToViewModelsAsync(classrooms);
 
-            foreach (var classroom in classrooms)
-            {
-                if (!string.IsNullOrEmpty(classroom.professorId))
-                {
-                    var professor = await _userService.GetUserByIdAsync(classroom.professorId);
-                    classroomViewModels.Add(new ClassroomViewModel
-                    {
-                        Classroom = classroom,
-                        ProfessorName = professor?.UserName,
-                        ProfessorPhoto = professor?.profilePhoto
-                    });
-                }
-            }
+            var allClassrooms = await _classroomService.GetAllClassroomsAsync();
+            var allClassroomViewModels = await _classroomService.MapClassroomsToViewModelsAsync(allClassrooms);
 
-            var viewModel = new UserClassroomsViewModel
+            var userClassroomsViewModel = new UserClassroomsViewModel
             {
                 UserAccount = existingUser,
-                Classrooms = classroomViewModels // Pass the populated classroomViewModels
+                Classrooms = classroomViewModels,
+                AllClassrooms = allClassroomViewModels
             };
 
-            return View(viewModel);
+            return View(userClassroomsViewModel);
         }
 
         public async Task<IActionResult> ClassroomFlux(int id)
@@ -328,5 +164,38 @@ namespace mvc.Controllers
             return View(viewModel);
         }
 
+        public async Task<IActionResult> UserProfile()
+        {
+            ViewData["Title"] = "UserProfile"; // Set the ViewData["Title"]
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            return View(user);
+        }
+
+        public async Task<IActionResult> Notifications()
+        {
+            // Get the logged-in user
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            // Fetch notifications for the logged-in user and convert to List
+            var notifications = (await _notificationService.GetNotificationsByUserIdAsync(user.Id)).ToList();
+
+            // Create the ViewModel
+            var viewModel = new UserNotificationsViewModel
+            {
+                UserAccount = user,
+                Notifications = notifications
+            };
+
+            return View(viewModel);
+        }
     }
 }

@@ -2,16 +2,21 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using mvc.Models;
 using mvc.Services;
+using mvc.ViewModels;
 
 namespace mvc.Controllers
 {
     public class DocumentController : BaseController
     {
         private readonly IDocumentService _documentService;
+        private readonly IClassroomStudentsService _classroomStudentsService;
+        private readonly IUserService _userService;
 
-        public DocumentController(UserManager<UserAccount> userManager, IDocumentService documentService) : base(userManager)
+        public DocumentController(UserManager<UserAccount> userManager, IDocumentService documentService, IClassroomStudentsService classroomStudentsService, IUserService userService) : base(userManager)
         {
             _documentService = documentService;
+            _classroomStudentsService = classroomStudentsService;
+            _userService = userService;
         }
 
         // GET: Document
@@ -223,6 +228,45 @@ namespace mvc.Controllers
             // Proceed to delete the document
             await _documentService.DeleteDocumentAsync(id);
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> GradeDocument(int id, int grade)
+        {
+            // Retrieve the document by ID
+            var document = await _documentService.GetDocumentByIdAsync(id);
+            if (document == null)
+            {
+                return NotFound();
+            }
+
+            // Update the grade
+            document.grade = grade;
+            await _documentService.UpdateDocumentAsync(document);
+
+            // Redirect back to the UploadList view
+            return RedirectToAction("UploadList", new { id = document.assignmentId });
+        }
+
+        public async Task<IActionResult> UploadList(int id)
+        {
+            ViewData["AssignmentId"] = id;
+
+            // Retrieve the classroom students and documents for the given assignment
+            var classroomStudents = await _classroomStudentsService.GetClassroomStudentsByAssignmentIdAsync(id);
+            var documents = (await _documentService.GetDocumentsByAssignmentIdAsync(id)).ToList();
+            var users = await _userService.GetAllUsersAsync();
+
+            // Prepare the view model
+            var ClassroomFluxViewModel = new ClassroomFluxViewModel
+            {
+                ClassroomStudents = classroomStudents,
+                Documents = documents,
+                Users = users
+            };
+
+            return View(ClassroomFluxViewModel);
         }
     }
 }

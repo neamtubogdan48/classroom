@@ -1,0 +1,63 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@model mvc.ViewModels.ClassroomFluxViewModel
+
+@{
+    ViewData["Title"] = "ClassroomList";
+}
+
+<link rel="stylesheet" href="~/css/studentList.css" asp-append-version="true" />
+
+<h1 class="centerDiv">Students List</h1>
+
+<table class="table">
+    <th class="centerDiv" colspan="3">Professor</th>
+    <tr>
+        @* Retrieve the professor's user details *@
+        @{
+            var professor = Model.Users.FirstOrDefault(u => u.Id == Model.Classroom.professorId);
+        }
+        @if (professor != null)
+        {
+            <td>
+                <img src="@Url.Content(professor.profilePhoto)" alt="Profile Photo" style="max-width: 50px; max-height: 50px; border-radius: 50%;" />
+            </td>
+            <td>
+                @professor.UserName
+            </td>
+            @if (HttpContextAccessor.HttpContext.Session.GetString("AccountType") == "Admin")
+            {
+                <td>
+                    <form asp-action="KickProfessor" asp-route-professorId="@professor.Id" asp-route-classroomId="@Model.Classroom.id" method="post" style="display:inline;">
+                        <button type="submit" class="btn">Kick</button>
+                    </form>
+                </td>
+            }
+        }
+    </tr>
+    <th class="centerDiv" colspan="3">Students</th>
+    @foreach (var student in Model.ClassroomStudents)
+    {
+        var user = Model.Users.FirstOrDefault(u => u.Id == student.userId);
+        if (user != null && user.accountType == "Student")
+        {
+            <tr>
+                <td>
+                    <img src="@Url.Content(user.profilePhoto)" alt="Profile Photo" style="max-width: 50px; max-height: 50px; border-radius: 50%;" />
+                </td>
+                <td>
+                    @user.UserName
+                </td>
+
+                @if (HttpContextAccessor.HttpContext.Session.GetString("AccountType") != "Student")
+                {
+                    <td>
+                        <form asp-action="KickStudent" asp-route-id="@student.id" method="post" style="display:inline;">
+                            <button type="submit" class="btn">Kick</button>
+                        </form>
+                    </td>
+                }
+            </tr>
+        }
+    }
+</table>
+

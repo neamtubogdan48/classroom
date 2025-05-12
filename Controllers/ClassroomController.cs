@@ -41,7 +41,7 @@ namespace mvc.Controllers
         // POST: Classroom/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("name,code,professorId")] Classroom classroom, IFormFile photoFile)
+        public async Task<IActionResult> Create([Bind("name,code,professorId")] Classroom classroom, IFormFile? photoFile)
         {
             if (photoFile != null && photoFile.Length > 0)
             {
@@ -82,7 +82,8 @@ namespace mvc.Controllers
             }
             else
             {
-                ModelState.AddModelError("photo", "Please upload a photo.");
+                // Assign a default photo path if no photo is uploaded
+                classroom.photo = "/images/defaultBanner.jpg"; // Default photo path
             }
 
             if (ModelState.IsValid)

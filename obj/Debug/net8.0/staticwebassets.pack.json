@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\css\\account.css"
     },
     {
+      "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\css\\controllers.css",
+      "PackagePath": "staticwebassets\\css\\controllers.css"
+    },
+    {
       "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\css\\default.css",
       "PackagePath": "staticwebassets\\css\\default.css"
     },
@@ -27,6 +31,18 @@
     {
       "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\css\\login.css",
       "PackagePath": "staticwebassets\\css\\login.css"
+    },
+    {
+      "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\css\\notifications.css",
+      "PackagePath": "staticwebassets\\css\\notifications.css"
+    },
+    {
+      "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\css\\studentList.css",
+      "PackagePath": "staticwebassets\\css\\studentList.css"
+    },
+    {
+      "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\css\\uploadList.css",
+      "PackagePath": "staticwebassets\\css\\uploadList.css"
     },
     {
       "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\css\\user.css",
@@ -113,8 +129,8 @@
       "PackagePath": "staticwebassets\\images\\craiova.png"
     },
     {
-      "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\images\\default.png",
-      "PackagePath": "staticwebassets\\images\\default.png"
+      "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\images\\defaultBanner.jpg",
+      "PackagePath": "staticwebassets\\images\\defaultBanner.jpg"
     },
     {
       "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\images\\dinamo.png",
@@ -173,8 +189,8 @@
       "PackagePath": "staticwebassets\\images\\stire1.jpeg"
     },
     {
-      "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\js\\deleteProfilePhoto.js",
-      "PackagePath": "staticwebassets\\js\\deleteProfilePhoto.js"
+      "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\js\\changeProfilePhoto.js",
+      "PackagePath": "staticwebassets\\js\\changeProfilePhoto.js"
     },
     {
       "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\lib\\bootstrap\\LICENSE",
@@ -417,8 +433,16 @@
       "PackagePath": "staticwebassets\\uploads\\assignments\\ed7ca374-2adb-4c63-8214-0d6b1185eb0e.txt"
     },
     {
+      "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\uploads\\classrooms\\3063fd97-1b7e-4eed-a7ee-f2fcb32a97f0.png",
+      "PackagePath": "staticwebassets\\uploads\\classrooms\\3063fd97-1b7e-4eed-a7ee-f2fcb32a97f0.png"
+    },
+    {
       "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\uploads\\classrooms\\67fa6c1c-a733-42ff-b508-72acad5ee56d.png",
       "PackagePath": "staticwebassets\\uploads\\classrooms\\67fa6c1c-a733-42ff-b508-72acad5ee56d.png"
+    },
+    {
+      "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\uploads\\documents\\2633311d-3277-4702-89ae-92d84b7d17d9.png",
+      "PackagePath": "staticwebassets\\uploads\\documents\\2633311d-3277-4702-89ae-92d84b7d17d9.png"
     },
     {
       "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\uploads\\documents\\83fe9e95-1b4d-4538-99ff-23e71b5c4fd1.png",
@@ -433,8 +457,12 @@
       "PackagePath": "staticwebassets\\uploads\\users\\13a2dbfe-92b9-4539-bb47-a20a71e09b8c.png"
     },
     {
-      "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\uploads\\users\\22e8780a-8919-47a4-8845-32969365e304.jpg",
-      "PackagePath": "staticwebassets\\uploads\\users\\22e8780a-8919-47a4-8845-32969365e304.jpg"
+      "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\uploads\\users\\2a55983d-7361-4953-8c48-760f69b049ea.jpg",
+      "PackagePath": "staticwebassets\\uploads\\users\\2a55983d-7361-4953-8c48-760f69b049ea.jpg"
+    },
+    {
+      "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\uploads\\users\\43fe6337-914d-412f-bd21-8ad7d5b7628a.png",
+      "PackagePath": "staticwebassets\\uploads\\users\\43fe6337-914d-412f-bd21-8ad7d5b7628a.png"
     },
     {
       "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\uploads\\users\\54d9412c-d304-481e-a664-7eeeb69bd1d8.png",
@@ -477,8 +505,16 @@
       "PackagePath": "staticwebassets\\uploads\\users\\e975a681-701d-4d13-9c95-ef011fe0d175.jpg"
     },
     {
+      "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\uploads\\users\\ea43965e-7380-4565-ac00-815108617698.jpg",
+      "PackagePath": "staticwebassets\\uploads\\users\\ea43965e-7380-4565-ac00-815108617698.jpg"
+    },
+    {
       "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\uploads\\users\\edb952b7-25c3-4ca1-954a-4c8000360d70.jpg",
       "PackagePath": "staticwebassets\\uploads\\users\\edb952b7-25c3-4ca1-954a-4c8000360d70.jpg"
+    },
+    {
+      "Id": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\wwwroot\\uploads\\users\\fbbc7aef-c100-483a-abde-827eff5b9874.png",
+      "PackagePath": "staticwebassets\\uploads\\users\\fbbc7aef-c100-483a-abde-827eff5b9874.png"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.mvc.props",

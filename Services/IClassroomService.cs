@@ -1,4 +1,5 @@
 using mvc.Models;
+using mvc.ViewModels;
 
 namespace mvc.Services
 {
@@ -9,5 +10,7 @@ namespace mvc.Services
         Task AddClassroomAsync(Classroom classroom);
         Task UpdateClassroomAsync(Classroom classroom);
         Task DeleteClassroomAsync(int id);
+        Task<Classroom?> GetClassroomByCodeAsync(int code);
+        Task<List<ClassroomViewModel>> MapClassroomsToViewModelsAsync(IEnumerable<Classroom> classrooms);
     }
 }

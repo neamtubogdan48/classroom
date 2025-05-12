@@ -61,10 +61,46 @@ namespace mvc.IRepository
             return await _context.Classroom.FirstOrDefaultAsync(c => c.id == id);
         }
 
-        public async Task<ClassroomStudents?> GetClassroomStudentByIdAsync(int classroomId, string userId)
+        public async Task RemoveClassroomStudentAsync(int id)
+        {
+            var classroomStudent = await _context.ClassroomStudents.FindAsync(id);
+            if (classroomStudent != null)
+            {
+                _context.ClassroomStudents.Remove(classroomStudent);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<ClassroomStudents?> GetClassroomStudentByIdAsync(string userId, int classroomId)
         {
             return await _context.ClassroomStudents
-                .FirstOrDefaultAsync(cs => cs.classroomId == classroomId && cs.userId == userId);
+                .FirstOrDefaultAsync(cs => cs.userId == userId && cs.classroomId == classroomId);
+        }
+
+        public async Task<List<ClassroomStudents>> GetClassroomStudentsByAssignmentIdAsync(int assignmentId)
+        {
+            // Retrieve the classroomId associated with the given assignmentId
+            var classroomId = await _context.Assignment
+                .Where(a => a.id == assignmentId)
+                .Select(a => a.classroomId)
+                .FirstOrDefaultAsync();
+
+            // If no classroomId is found, return an empty list
+            if (classroomId == 0)
+            {
+                return new List<ClassroomStudents>();
+            }
+
+            // Retrieve the students in the classroom
+            return await _context.ClassroomStudents
+                .Where(cs => cs.classroomId == classroomId)
+                .ToListAsync();
+        }
+
+        public async Task<ClassroomStudents?> GetClassroomStudentByUserAndClassroomAsync(string userId, int classroomId)
+        {
+            return await _context.ClassroomStudents
+                .FirstOrDefaultAsync(cs => cs.userId == userId && cs.classroomId == classroomId);
         }
     }
 }

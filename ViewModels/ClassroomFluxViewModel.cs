@@ -12,6 +12,10 @@ namespace mvc.ViewModels
         public UserAccount UserAccount { get; set; }
         public IEnumerable<UserAccount> Users { get; set; }
 
+        // New property for ClassroomStudents
+        public List<ClassroomStudents> ClassroomStudents { get; set; }
+
+
         //Document
         public string userId { get; set; }
         public int assignmentId { get; set; }

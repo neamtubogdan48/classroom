@@ -1,0 +1,67 @@
+﻿/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #808080;
+    color: #333;
+}
+
+h1.centerDiv {
+    text-align: center;
+    margin: 20px 0;
+    color: #1e90ff; /* Dodger blue */
+}
+
+/* Table as List Styles */
+table.table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: transparent; /* No background */
+}
+
+    table.table th {
+        text-align: center;
+        font-size: 16px;
+        color: #1e90ff; /* Dodger blue */
+        padding-bottom: 10px;
+    }
+
+    table.table tr {
+        display: flex;
+        justify-content: center; /* Center the row */
+        align-items: center; /* Vertically align items */
+        margin-bottom: 10px; /* Add spacing between rows */
+    }
+
+    table.table td {
+        display: flex;
+        align-items: center;
+        margin: 0 10px; /* Add spacing between items */
+        padding: 5px 0; /* Reduced spacing */
+        border: none; /* No borders */
+    }
+
+/* Image Styles */
+img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 10px; /* Space between image and text */
+}
+
+/* Button Styles */
+button.btn {
+    background-color: #1e90ff; /* Dodger blue */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+    button.btn:hover {
+        background-color: #1c86ee; /* Slightly darker blue */
+    }
