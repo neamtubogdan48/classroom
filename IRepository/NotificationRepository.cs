@@ -44,5 +44,22 @@ namespace mvc.IRepository
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<List<Notification>> GetNotificationsByUserIdAsync(string userId)
+        {
+            return await _context.Notification
+                .Where(n => n.userId == userId)
+                .OrderByDescending(n => n.timeSent)
+                .ToListAsync();
+        }
+
+        public async Task<bool> ExistsAsync(string userId, string name, string description = null)
+        {
+            return await _context.Notification.AnyAsync(n =>
+                n.userId == userId &&
+                n.name == name &&
+                (description == null || n.description == description));
+        }
+
     }
 }

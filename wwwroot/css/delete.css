@@ -1,0 +1,104 @@
+﻿:root {
+    --background: #80b7ff;
+    --accent: #5c9bf1;
+    --text: #fff;
+    --table-header: #cce6ff;
+    --table-body: #fffaf5;
+    --btn-gradient-start: #80b7ff;
+    --btn-gradient-end: #3a8ee6;
+}
+
+body {
+    background-color: var(--background);
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+h1.centerDiv {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: var(--text);
+}
+
+table.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--table-body);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+}
+
+    table.table th {
+        background-color: var(--table-header);
+        color: var(--text);
+        padding: 12px;
+        text-align: left;
+    }
+
+    table.table td {
+        padding: 12px;
+        border-top: 1px solid #e0e0e0;
+        vertical-align: middle;
+    }
+
+    table.table tr:hover {
+        background-color: #f0faff;
+    }
+
+.centerDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Unified button style for both <a> and <input type="submit"> */
+a.btn,
+input.btn[type="submit"] {
+    background: linear-gradient(to right, var(--btn-gradient-start), var(--btn-gradient-end));
+    color: #fff;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin: 5px;
+    display: inline-block;
+    text-align: center;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+}
+
+    a.btn:hover,
+    input.btn[type="submit"]:hover,
+    a.btn:focus,
+    input.btn[type="submit"]:focus {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        outline: none;
+    }
+
+    a.btn:active,
+    input.btn[type="submit"]:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+.centerDiv p a.btn {
+    margin-top: 20px;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-size: 1rem;
+}
+
+    .centerDiv p a.btn:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+    }

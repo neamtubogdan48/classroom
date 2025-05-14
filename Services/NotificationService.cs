@@ -36,5 +36,15 @@ namespace mvc.Services
         {
             await _notificationRepository.DeleteNotificationAsync(id);
         }
+
+        public async Task<List<Notification>> GetNotificationsByUserIdAsync(string userId)
+        {
+            return await _notificationRepository.GetNotificationsByUserIdAsync(userId);
+        }
+
+        public async Task<bool> ExistsAsync(string userId, string name, string description = null)
+        {
+            return await _notificationRepository.ExistsAsync(userId, name, description);
+        }
     }
 }

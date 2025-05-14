@@ -111,4 +111,10 @@ public class UserRepository : IUserRepository
         await _context.SaveChangesAsync();
     }
 
+    public async Task<IEnumerable<UserAccount>> GetByAccountTypeAsync(string accountType)
+    {
+        return await _context.Users
+            .Where(u => u.accountType == accountType)
+            .ToListAsync();
+    }
 }

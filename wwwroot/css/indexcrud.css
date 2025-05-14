@@ -1,0 +1,141 @@
+﻿:root {
+    --background: #80b7ff;
+    --accent: #5c9bf1;
+    --text: #fffaf5;
+    --table-header: #cce6ff; /* baby blue */
+    --table-body: #fffaf5; /* crem deschis */
+    --btn-gradient-start: #80b7ff;
+    --btn-gradient-end: #3a8ee6;
+}
+
+body {
+    background-color: var(--background);
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 20px;
+    overflow-x: hidden; /* Previne scroll-ul orizontal */
+}
+
+/* Stil pentru titlul paginii */
+h1.centerDiv {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2rem;
+    color: var(--text);
+    font-weight: bold;
+}
+
+/* Stil pentru tabel */
+table.table {
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
+    background-color: var(--table-body);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+    font-size: 1rem;
+    table-layout: fixed;
+}
+
+    /* Stil pentru celulele de tabel */
+    table.table th, table.table td {
+        padding: 15px 20px;
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    table.table th {
+        background-color: var(--table-header);
+        color: var(--text);
+        font-weight: bold;
+        border-bottom: 2px solid #cce6ff;
+    }
+
+    table.table td {
+        border-top: 1px solid #e0e0e0;
+        vertical-align: middle;
+    }
+
+    table.table tr:hover {
+        background-color: #f0faff;
+    }
+
+    /* Stil pentru coloana Actions */
+    table.table td:last-child {
+        white-space: normal; /* Permite mai multe rânduri de text dacă este necesar */
+    }
+
+/* Stil pentru butoane */
+a.btn {
+    background: linear-gradient(to right, var(--btn-gradient-start), var(--btn-gradient-end));
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin: 5px;
+    display: inline-block;
+    text-align: center;
+    font-size: 0.9rem; /* Dimensiune butoane uniformă */
+}
+
+    a.btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    a.btn:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+/* Butonul de creare */
+.centerDiv p a.btn {
+    margin-top: 20px;
+    display: inline-block;
+    background: linear-gradient(to right, var(--btn-gradient-start), var(--btn-gradient-end));
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+    .centerDiv p a.btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+/* Ajustări pentru responsive */
+@media (max-width: 768px) {
+    table.table th, table.table td {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    table.table {
+        font-size: 0.85rem;
+    }
+
+    .centerDiv {
+        font-size: 1.2rem;
+    }
+
+    a.btn {
+        font-size: 0.8rem;
+        padding: 8px 16px;
+    }
+
+    table.table td:last-child {
+        white-space: normal;
+        word-wrap: break-word;
+        text-align: center;
+    }
+}

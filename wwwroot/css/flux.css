@@ -1,9 +1,9 @@
 ﻿:root {
-    --primary: #3a8ee6;
+    --primary: #f1f5f9;
     --accent: #5c9bf1;
-    --background: #f0f8ff;
-    --text: #2d2d2d;
-    --card-light: #ffffff;
+    --background: #80b7ff; /* baby blue */
+    --text: white;
+    --card-light: #fffaf0; /* crem deschis */
     --card-teacher: linear-gradient(to right, #d4f4fd, #aee4ff);
     --card-student: linear-gradient(to right, #e0f7ff, #c5e8ff);
     --highlight: #7ec8f9;
@@ -18,8 +18,9 @@
 }
 
 body {
+    padding-top: 20px;
     background-color: var(--background);
-    color: var(--text);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
 }
 
 .container {
@@ -79,7 +80,10 @@ input[type="text"],
 input[type="datetime-local"],
 input[type="number"],
 input[type="file"],
-textarea {
+input[type="email"],
+input[type="password"],
+textarea,
+select {
     width: 100%;
     padding: 12px;
     margin-top: 6px;
@@ -98,6 +102,10 @@ textarea {
 
 .edit-section {
     margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
 }
 
     .edit-section .btn {
@@ -154,29 +162,29 @@ textarea {
     margin-bottom: 10px;
     border-radius: 8px;
     display: flex;
-    position: relative; /* Allow absolute positioning of child elements */
-    padding-right: 50px; /* Add space for the button to avoid overlap */
+    position: relative;
+    padding-right: 50px;
 }
 
     .comment button {
-        padding: 8px 8px; /* Smaller padding for a compact button */
-        font-size: 12px; /* Smaller font size */
+        padding: 8px 8px;
+        font-size: 12px;
         border-radius: 4px;
-        position: absolute; /* Position the button absolutely */
-        top: 0px; /* Align the button closer to the top of the .comment div */
-        right: 10px; /* Align the button to the right of the .comment div */
+        position: absolute;
+        top: 0px;
+        right: 10px;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
         align-self: flex-end;
         margin-top: 5px;
     }
 
         .comment button.gradient:hover {
-        transform: scale(1.02); /* Slight scaling to reduce movement */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for hover effect */
+            transform: scale(1.02);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
     .comment .inline-form {
-        margin-left: 10px; /* Add spacing between the comment text and the button */
+        margin-left: 10px;
     }
 
 .comments input[type="text"] {
@@ -188,14 +196,14 @@ textarea {
     width: 100%;
 }
 
-.upload-section .btn.gradient {
-    pointer-events: none; /* Disable hover and click interactions */
-    transform: none; /* Remove any transform effects */
-    box-shadow: none; /* Remove hover shadow */
-    transition: none; /* Disable hover transition */
+.withdraw-section .btn.gradient {
+    pointer-events: none;
+    transform: none;
+    box-shadow: none;
+    transition: none;
 }
 
-/* Style for the select dropdown */
+/* Select custom */
 .custom-select {
     background-color: #f9f9f9;
     border: 1px solid #ccc;
@@ -213,7 +221,6 @@ textarea {
         outline: none;
     }
 
-/* Style for the option elements */
 .custom-option {
     background-color: #ffffff;
     color: #333;
@@ -226,3 +233,41 @@ textarea {
         color: #000;
     }
 
+.classroomList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* Assignment Description */
+.assignment-desc {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+
+/* Stil buton Create (nou) */
+.form-actions {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn-primary {
+    background-color: #1a73e8;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-primary:hover {
+    background-color: #185abc;
+}

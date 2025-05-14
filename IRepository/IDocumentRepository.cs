@@ -10,5 +10,6 @@ namespace mvc.IRepository
         Task UpdateDocumentAsync(Document document);
         Task DeleteDocumentAsync(int id);
         Task<IEnumerable<Document>> GetDocumentsByAssignmentIdAsync(int assignmentId);
+        Task<bool> HasNotificationWithDescriptionAsync(string userId, string description);
     }
 }

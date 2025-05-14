@@ -7844,23 +7844,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\neamt\\.nuget\\packages\\": {},
+    "C:\\Users\\Assana\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\mvc.csproj",
+      "projectUniqueName": "C:\\Users\\Assana\\Desktop\\mvc 2dev 2\\mvc dev 2\\mvc\\mvc.csproj",
       "projectName": "mvc",
-      "projectPath": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\mvc.csproj",
-      "packagesPath": "C:\\Users\\neamt\\.nuget\\packages\\",
-      "outputPath": "D:\\Facultate\\Anul III\\Sem II\\Proiect IS\\mvc dev 2\\mvc\\obj\\",
+      "projectPath": "C:\\Users\\Assana\\Desktop\\mvc 2dev 2\\mvc dev 2\\mvc\\mvc.csproj",
+      "packagesPath": "C:\\Users\\Assana\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Assana\\Desktop\\mvc 2dev 2\\mvc dev 2\\mvc\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\neamt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Assana\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

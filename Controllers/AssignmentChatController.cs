@@ -8,10 +8,12 @@ namespace mvc.Controllers
     public class AssignmentChatController : BaseController
     {
         private readonly IAssignmentChatService _assignmentChatService;
+        private readonly IAssignmentService _assignmentService;
 
-        public AssignmentChatController(UserManager<UserAccount> userManager, IAssignmentChatService assignmentChatService) : base(userManager)
+        public AssignmentChatController(UserManager<UserAccount> userManager, IAssignmentChatService assignmentChatService, IAssignmentService assignmentService) : base(userManager)
         {
             _assignmentChatService = assignmentChatService;
+            _assignmentService = assignmentService;
         }
 
         // GET: AssignmentChat
@@ -46,10 +48,18 @@ namespace mvc.Controllers
             if (ModelState.IsValid)
             {
                 await _assignmentChatService.AddAssignmentChatAsync(assignmentChat);
-                return RedirectToAction(nameof(Index));
+
+                // Get the assignment to retrieve classroomId
+                var assignment = await _assignmentService.GetAssignmentByIdAsync(assignmentChat.assignmentId);
+                if (assignment == null)
+                {
+                    return NotFound("Assignment not found.");
+                }
+                return RedirectToAction("ClassroomFlux", "Home", new { id = assignment.classroomId });
             }
             return View(assignmentChat);
         }
+
 
         // GET: AssignmentChat/Edit/5
         public async Task<IActionResult> Edit(int id)
@@ -61,6 +71,7 @@ namespace mvc.Controllers
             }
             return View(assignmentChat);
         }
+
 
         // POST: AssignmentChat/Edit/5
         [HttpPost]
@@ -80,6 +91,8 @@ namespace mvc.Controllers
             return View(assignmentChat);
         }
 
+
+
         // GET: AssignmentChat/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
@@ -96,8 +109,23 @@ namespace mvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            // Get the AssignmentChat to access assignmentId before deleting
+            var assignmentChat = await _assignmentChatService.GetAssignmentChatByIdAsync(id);
+            if (assignmentChat == null)
+            {
+                return NotFound();
+            }
+
+            // Get the assignment to retrieve classroomId
+            var assignment = await _assignmentService.GetAssignmentByIdAsync(assignmentChat.assignmentId);
+            if (assignment == null)
+            {
+                return NotFound("Assignment not found.");
+            }
+
             await _assignmentChatService.DeleteAssignmentChatAsync(id);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("ClassroomFlux", "Home", new { id = assignment.classroomId });
         }
+
     }
 }

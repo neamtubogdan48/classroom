@@ -1,0 +1,140 @@
+﻿:root {
+    --background: #80b7ff;
+    --accent: #5c9bf1;
+    --text: #fffaf5;
+    --table-header: #cce6ff;
+    --table-body: #fffaf5;
+    --btn-gradient-start: #80b7ff;
+    --btn-gradient-end: #3a8ee6;
+}
+
+body {
+    background-color: var(--background);
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+h1.centerDiv {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: var(--text);
+}
+
+/* Tabel */
+table.table {
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
+    background-color: var(--table-body);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    table-layout: auto;
+}
+
+    table.table th, table.table td {
+        padding: 15px 20px;
+        text-align: left;
+        vertical-align: middle;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    table.table thead th {
+        background-color: var(--table-header);
+        font-weight: bold;
+        color: var(--text);
+    }
+
+/* Profile container + poză profil */
+.profile-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent);
+}
+
+/* Butoane */
+.btn {
+    background: linear-gradient(to right, var(--btn-gradient-start), var(--btn-gradient-end));
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin: 5px 4px;
+    display: inline-block;
+}
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+/* Input pentru notă */
+input[name="grade"] {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    table.table, table.table thead, table.table tbody, table.table th, table.table td, table.table tr {
+        display: block;
+        width: 100%;
+    }
+
+        table.table thead {
+            display: none;
+        }
+
+        table.table tr {
+            margin-bottom: 15px;
+            background-color: var(--table-body);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 10px;
+        }
+
+        table.table td {
+            padding: 10px;
+            text-align: left;
+            position: relative;
+        }
+
+            table.table td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                color: var(--text);
+                display: block;
+                margin-bottom: 5px;
+            }
+
+    .btn {
+        display: block;
+        width: 100%;
+        margin: 5px 0;
+        text-align: center;
+    }
+}

@@ -17,213 +17,229 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = mvc
 build_property.RootNamespace = mvc
-build_property.ProjectDir = D:\Facultate\Anul III\Sem II\Proiect IS\mvc dev 2\mvc\
+build_property.ProjectDir = C:\Users\Assana\Desktop\mvc 2dev 2\mvc dev 2\mvc\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\Facultate\Anul III\Sem II\Proiect IS\mvc dev 2\mvc
+build_property.MSBuildProjectDirectory = C:\Users\Assana\Desktop\mvc 2dev 2\mvc dev 2\mvc
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Pages/_ValidationScriptsPartial.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Pages/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Account/Login.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Account/Register.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/AssignmentChat/Create.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Account/RequestReset.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZXF1ZXN0UmVzZXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/AssignmentChat/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzaWdubWVudENoYXRcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/AssignmentChat/Delete.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/AssignmentChat/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzaWdubWVudENoYXRcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/AssignmentChat/Details.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/AssignmentChat/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzaWdubWVudENoYXRcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/AssignmentChat/Edit.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/AssignmentChat/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzaWdubWVudENoYXRcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/AssignmentChat/Index.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/AssignmentChat/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzaWdubWVudENoYXRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Assignment/Create.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Assignment/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzaWdubWVudFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Assignment/Delete.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Assignment/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzaWdubWVudFxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Assignment/Details.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Assignment/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzaWdubWVudFxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Assignment/Edit.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Assignment/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzaWdubWVudFxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Assignment/Index.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Assignment/EditAssignment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzaWdubWVudFxFZGl0QXNzaWdubWVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Assignment/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzaWdubWVudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/ClassroomStudents/Create.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/ClassroomStudents/ClassroomList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3Nyb29tU3R1ZGVudHNcQ2xhc3Nyb29tTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/ClassroomStudents/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3Nyb29tU3R1ZGVudHNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/ClassroomStudents/Delete.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/ClassroomStudents/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3Nyb29tU3R1ZGVudHNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/ClassroomStudents/Details.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/ClassroomStudents/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3Nyb29tU3R1ZGVudHNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/ClassroomStudents/Edit.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/ClassroomStudents/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3Nyb29tU3R1ZGVudHNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/ClassroomStudents/Index.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/ClassroomStudents/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3Nyb29tU3R1ZGVudHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Classroom/Create.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Classroom/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3Nyb29tXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Classroom/Delete.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Classroom/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3Nyb29tXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Classroom/Details.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Classroom/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3Nyb29tXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Classroom/Edit.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Classroom/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3Nyb29tXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Classroom/Index.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Classroom/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3Nyb29tXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Document/Create.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Document/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Document/Delete.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Document/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Document/Details.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Document/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Document/Edit.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Document/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Document/Index.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Document/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Home/AccessDenied.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Document/UploadList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRcVXBsb2FkTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Home/AccessDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBY2Nlc3NEZW5pZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Home/ClassroomFlux.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Home/ClassroomFlux.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDbGFzc3Jvb21GbHV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Home/Home.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Home/Controllers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb250cm9sbGVycy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Home/Home.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxIb21lLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Home/Notifications.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxOb3RpZmljYXRpb25zLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Home/User.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxVc2VyLmNzaHRtbA==
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Home/UserProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxVc2VyUHJvZmlsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Home/UserSettings.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxVc2VyU2V0dGluZ3MuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Notification/Create.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Notification/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Notification/Delete.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Notification/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Notification/Details.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Notification/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Notification/Edit.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Notification/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Notification/Index.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Notification/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Shared/Error.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Shared/_AccountLayout.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Shared/_AccountLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BY2NvdW50TGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Users/Create.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Users/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Users/Delete.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Users/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Users/Details.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Users/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Users/Edit.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Users/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Users/Index.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Users/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/_ViewImports.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/_ViewStart.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Facultate/Anul III/Sem II/Proiect IS/mvc dev 2/mvc/Views/Shared/_Layout.cshtml]
+[C:/Users/Assana/Desktop/mvc 2dev 2/mvc dev 2/mvc/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-x8p8g49oo3

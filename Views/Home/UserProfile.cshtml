@@ -1,0 +1,205 @@
+@model mvc.Models.UserAccount
+
+@{
+    ViewData["Title"] = "UserProfile";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>User Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        body{
+        margin-top:20px;
+        background:#f8f8f8
+        }
+    </style>
+</head>
+<body>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="container">
+        <div class="row flex-lg-nowrap">
+            <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
+                <div class="card p-3">
+                    <div class="e-navlist e-navlist--active-bg">
+                        <ul class="nav">
+                            <li class="nav-item"><a class="nav-link px-2" asp-action="Home" target="__blank"><i class="fa fa-fw fa-home mr-1"></i><span>Dashboard</span></a></li>
+                            <li class="nav-item"><a class="nav-link px-2" asp-action="UserProfile" target="__blank"><i class="fa fa-fw fa-cog mr-1"></i><span>Settings</span></a></li>
+                            <li class="nav-item"><a class="nav-link px-2" asp-action="Notifications" target="__blank"><i class="fa fa-fw fa-bell mr-1"></i><span>Alerts</span></a></li>
+                            @if (Model.accountType == "Admin")
+                            {
+                                <li class="nav-item"><a class="nav-link px-2" asp-action ="Controllers" target="__blank"><i class="fa fa-fw fa-th mr-1"></i><span>CRUD</span></a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+  <div class="col">
+    <div class="row">
+      <div class="col mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="e-profile">
+              <div class="row">
+                <div class="col-12 col-sm-auto mb-3">
+                  <div class="mx-auto" >
+                    <div class="d-flex justify-content-center align-items-center rounded">
+                                                    <img src="@Url.Content(@Model.profilePhoto)" style="height: 100px; width: 100px; border-radius:30%;" />
+                     </div>
+                  </div>
+                </div>
+                <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                  <div class="text-center text-sm-left mb-2 mb-sm-0">
+                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">@Model.UserName</h4>
+                    
+                    <div class="mt-2">
+                         <form asp-controller="Users" asp-action="ChangeProfilePhoto" method="post" enctype="multipart/form-data" id="changePhotoForm" class="d-inline">
+                            <input type="hidden" name="id" value="@Model.Id" />
+                            <input type="file" id="profilePhotoFile" name="profilePhotoFile" class="d-none" onchange="submitChangePhotoForm()" />
+                            <button class="btn btn-primary" type="button" onclick="triggerFileInput()">
+                                <i class="fa fa-fw fa-camera"></i>
+                                <span>Change Photo</span>
+                            </button>
+                        </form>
+                        <button class="btn btn-primary" id="resetProfilePhotoButton" data-user-id="@Model.Id" type="button">
+                            <i class="fa fa-fw fa-camera"></i>
+                            <span>Reset Profile Photo</span>
+                        </button>
+                    </div>
+                  </div>
+                  <div class="text-center text-sm-right">
+                    <span class="badge badge-secondary">@Model.accountType</span>
+                    
+                  </div>
+                </div>
+              </div>
+              <ul class="nav nav-tabs">
+                <li class="nav-item"><a href="" class="active nav-link">Settings</a></li>
+              </ul>
+              <div class="tab-content pt-3">
+                <div class="tab-pane active">
+                    <form asp-controller="Users" asp-action="ChangeAccSettings" method="post" enctype="multipart/form-data" class="form">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="PasswordHash" value="@Model.PasswordHash" />
+                        <input type="hidden" asp-for="accountType" value="@Model.accountType" />
+                        <div class="row">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label asp-for="UserName" class="control-label">Username</label>
+                                            <input asp-for="UserName" class="form-control" />
+                                            <span asp-validation-for="UserName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label asp-for="PhoneNumber" class="control-label">Phone Number</label>
+                                            <input asp-for="PhoneNumber" class="form-control" />
+                                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label asp-for="Email" class="control-label">Email</label>
+                                            <input asp-for="Email" class="form-control" />
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <div class="form-group">
+                                            <label asp-for="githubLink" class="control-label">GitHub Link</label>
+                                            <input asp-for="githubLink" class="form-control" />
+                                            <span asp-validation-for="githubLink" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-sm-6 mb-3">
+                                <div class="mb-2"><b>Change Password</b></div>
+                                   <div class="row">
+                                        <div class="col">
+                                             <div class="form-group">
+                                                <label for="currentPassword">Current Password</label>
+                                                <input id="currentPassword" name="currentPassword" class="form-control" type="password" />
+                                             </div>
+                                        </div>
+                                   </div>
+                                   <div class="row">
+                                        <div class="col">
+                                             <div class="form-group">
+                                                 <label for="newPassword">New Password</label>
+                                                 <input id="newPassword" name="newPassword" class="form-control" type="password" />
+                                             </div>
+                                        </div>
+                                   </div>
+                                   <div class="row">
+                                        <div class="col">
+                                             <div class="form-group">
+                                                  <label for="confirmPassword">Confirm Password</label>
+                                                  <input id="confirmPassword" name="confirmPassword" class="form-control" type="password" />
+                                             </div>
+                                        </div>
+                                   </div>
+                                </div>
+                                <div class="col-12 col-sm-5 offset-sm-1 mb-3">
+                                    <div class="mb-2"><b>Keeping in Touch</b></div>
+                                    <div class="row">
+                                         <div class="col">
+                                              <div class="custom-controls-stacked px-2">
+                                                   <div class="form-check">
+                                                        <input asp-for="notificationSettings" class="form-check-input" id="notifications-blog" type="checkbox" />
+                                                        <label asp-for="notificationSettings" class="form-check-label" for="notifications-blog">Notifications</label>
+                                                   </div>
+                                              </div>
+                                         </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="row">
+                             <div class="col d-flex justify-content-end">
+                                <button class="btn btn-primary" type="submit">Save Changes</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-3 mb-3">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="px-xl-3">
+              <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                <button type="submit" class="btn btn-block btn-secondary">
+                    <i class="fa fa-sign-out"></i>
+                    <span>Logout</span>
+                </button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/changeProfilePhoto.js" asp-append-version="true"></script>
+
+</body>
+</html>

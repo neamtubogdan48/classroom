@@ -48,25 +48,20 @@ namespace mvc.Controllers
         {
             if (requirementsDocFile != null && requirementsDocFile.Length > 0)
             {
-                Console.WriteLine($"File Name: {requirementsDocFile.FileName}");
-                Console.WriteLine($"File Size: {requirementsDocFile.Length} bytes");
 
                 // Validate file size (max 100MB)
                 const long maxFileSize = 100 * 1024 * 1024; // 100MB in bytes
                 if (requirementsDocFile.Length > maxFileSize)
                 {
-                    Console.WriteLine("File size exceeds the maximum allowed size.");
                     ModelState.AddModelError("requirementsDoc", "The file size cannot exceed 100MB.");
                 }
 
                 // Validate file type
                 var allowedExtensions = new[] { ".pdf", ".docx", ".txt", ".zip", ".rar" };
                 var fileExtension = Path.GetExtension(requirementsDocFile.FileName).ToLower();
-                Console.WriteLine($"File Extension: {fileExtension}");
 
                 if (!allowedExtensions.Contains(fileExtension))
                 {
-                    Console.WriteLine("Invalid file type.");
                     ModelState.AddModelError("requirementsDoc", "Only PDF, DOCX, TXT, and archive files are allowed.");
                 }
 
@@ -77,11 +72,9 @@ namespace mvc.Controllers
                         // Define the path to save the uploaded file
                         var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/assignments");
                         Directory.CreateDirectory(uploadsFolder); // Ensure the directory exists
-                        Console.WriteLine($"Uploads Folder: {uploadsFolder}");
 
                         var uniqueFileName = Guid.NewGuid().ToString() + fileExtension;
                         var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                        Console.WriteLine($"File Path: {filePath}");
 
                         // Save the file to the server
                         using (var stream = new FileStream(filePath, FileMode.Create))
@@ -91,11 +84,9 @@ namespace mvc.Controllers
 
                         // Save the file path in the requirementsDoc property
                         assignment.requirementsDoc = $"/uploads/assignments/{uniqueFileName}";
-                        Console.WriteLine($"File saved successfully: {assignment.requirementsDoc}");
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"Error saving file: {ex.Message}");
                         ModelState.AddModelError("requirementsDoc", "An error occurred while saving the file.");
                     }
                 }
@@ -104,7 +95,6 @@ namespace mvc.Controllers
             {
                 // If no file is uploaded, set the requirementsDoc property to null or an empty string
                 assignment.requirementsDoc = null;
-                Console.WriteLine("No file uploaded. Proceeding without a requirements document.");
             }
 
             if (ModelState.IsValid)
@@ -117,11 +107,30 @@ namespace mvc.Controllers
                 }
 
                 await _assignmentService.AddAssignmentAsync(assignment);
-                Console.WriteLine("Assignment created successfully.");
-                return RedirectToAction(nameof(Index));
+
+                // Notify all students in the classroom
+                var classroomStudentsService = HttpContext.RequestServices.GetService(typeof(IClassroomStudentsService)) as IClassroomStudentsService;
+                var notificationService = HttpContext.RequestServices.GetService(typeof(INotificationService)) as INotificationService;
+                if (classroomStudentsService != null && notificationService != null)
+                {
+                    var students = await classroomStudentsService.GetClassroomStudentsByClassroomIdAsync(assignment.classroomId);
+                    foreach (var student in students)
+                    {
+                        var notification = new Notification
+                        {
+                            userId = student.userId,
+                            name = "New Assignment",
+                            description = $"A new assignment '{assignment.name}' has been created in your classroom.",
+                            timeSent = DateTime.UtcNow.AddHours(3)
+                        };
+                        await notificationService.AddNotificationAsync(notification);
+                    }
+                }
+
+                return RedirectToAction("ClassroomFlux", "Home", new { id = assignment.classroomId });
+
             }
 
-            Console.WriteLine("ModelState is invalid.");
             return View(assignment);
         }
 
@@ -236,10 +245,13 @@ namespace mvc.Controllers
             {
                 // Update the assignment in the database
                 await _assignmentService.UpdateAssignmentAsync(existingAssignment);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("ClassroomFlux", "Home", new { id = assignment.classroomId });
             }
 
             return View(assignment);
+
+           
+
         }
 
         // GET: Assignment/Delete/5
@@ -278,7 +290,8 @@ namespace mvc.Controllers
 
             // Proceed to delete the assignment
             await _assignmentService.DeleteAssignmentAsync(id);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("ClassroomFlux", "Home", new { id = assignment.classroomId });
         }
     }
-}
+    }
+

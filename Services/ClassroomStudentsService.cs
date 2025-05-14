@@ -48,9 +48,29 @@ namespace mvc.Services
             return await _classroomStudentsRepository.GetClassroomByIdAsync(id);
         }
 
+        public async Task RemoveClassroomStudentAsync(int id)
+        {
+            await _classroomStudentsRepository.RemoveClassroomStudentAsync(id);
+        }
+
         public async Task<ClassroomStudents?> GetClassroomStudentByIdAsync(int classroomId, string userId)
         {
-            return await _classroomStudentsRepository.GetClassroomStudentByIdAsync(classroomId, userId);
+            return await _classroomStudentsRepository.GetClassroomStudentByIdAsync(userId, classroomId);
+        }
+
+        public async Task<List<ClassroomStudents>> GetClassroomStudentsByAssignmentIdAsync(int assignmentId)
+        {
+            return await _classroomStudentsRepository.GetClassroomStudentsByAssignmentIdAsync(assignmentId);
+        }
+
+        public async Task<ClassroomStudents?> GetClassroomStudentByUserAndClassroomAsync(string userId, int classroomId)
+        {
+            return await _classroomStudentsRepository.GetClassroomStudentByUserAndClassroomAsync(userId, classroomId);
+        }
+
+        public async Task<IEnumerable<ClassroomStudents>> GetClassroomStudentsByClassroomIdAsync(int classroomId)
+        {
+            return await _classroomStudentsRepository.GetByClassroomIdAsync(classroomId);
         }
     }
 }
