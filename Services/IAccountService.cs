@@ -10,4 +10,5 @@ public interface IAccountService
     Task<IdentityResult> RegisterUserAsync(RegisterViewModel model);
     Task LogoutAsync();
     Task AddUserRoleAsync(string email, string role);
+    Task<IEnumerable<UserAccount>> GetUsersByAccountTypeAsync(string accountType);
 }

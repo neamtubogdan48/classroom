@@ -15,7 +15,9 @@ namespace mvc.IRepository
 
         public async Task<IEnumerable<Classroom>> GetAllClassroomsAsync()
         {
-            return await _context.Classroom.ToListAsync();
+            return await _context.Classroom
+                .OrderBy(c => c.name)
+                .ToListAsync();
         }
 
         public async Task<Classroom?> GetClassroomByIdAsync(int id)
@@ -43,6 +45,11 @@ namespace mvc.IRepository
                 _context.Classroom.Remove(classroom);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task<Classroom?> GetClassroomByCodeAsync(int code)
+        {
+            return await _context.Classroom.FirstOrDefaultAsync(c => c.code == code);
         }
     }
 }

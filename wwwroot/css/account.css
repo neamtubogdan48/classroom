@@ -1,7 +1,15 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
 
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f0f4ff; /* un albastru pastelat */
+    margin: 0;
+    padding: 0;
+}
+
+/* Container central */
 .account-container {
-    background-image: url('../images/fundal2.jpg');
+    background-image: url('../images/login.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: repeat-y;
@@ -9,15 +17,86 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 2rem 0;
+    padding: 2rem;
 }
 
+/* Cutia de login */
 .account-box {
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background-color: #ffffff;
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     max-width: 500px;
     width: 100%;
-    opacity: .9;
+    border-top: 6px solid #4CAF50; /* Verde educațional */
+}
+
+    /* Titlul */
+    .account-box h2 {
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+/* Etichetele câmpurilor */
+.form-label {
+    font-weight: 600;
+    color: #555;
+}
+
+/* Input-urile */
+.form-control {
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+    .form-control:focus {
+        outline: none;
+        border-color: #4CAF50;
+        box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+    }
+
+/* Mesaje de eroare */
+.text-danger {
+    font-size: 0.9rem;
+}
+
+/* Buton login */
+.btn-success {
+    background-color: #4CAF50;
+    border: none;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+    .btn-success:hover {
+        background-color: #45a049;
+    }
+
+/* Linkuri */
+a {
+    color: #2196F3;
+    transition: color 0.3s;
+}
+
+    a:hover {
+        color: #0b7dda;
+    }
+
+/* Texturi și spacing */
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.text-center {
+    text-align: center;
 }

@@ -48,10 +48,15 @@ namespace mvc.IRepository
         public async Task<IEnumerable<Document>> GetDocumentsByAssignmentIdAsync(int assignmentId)
         {
             return await _context.Document
-                .AsNoTracking() // Ensures no tracking for better performance
                 .Where(doc => doc.assignmentId == assignmentId)
                 .ToListAsync();
         }
 
+        public async Task<bool> HasNotificationWithDescriptionAsync(string userId, string description)
+        {
+            return await _context.Notification.AnyAsync(n =>
+                n.userId == userId &&
+                n.description == description);
+        }
     }
 }

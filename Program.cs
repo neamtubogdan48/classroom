@@ -47,6 +47,8 @@ builder.Services.AddScoped<IAssignmentRepository, AssignmentRepository>();
 builder.Services.AddScoped<IAssignmentService, AssignmentService>();
 builder.Services.AddScoped<IAssignmentChatRepository, AssignmentChatRepository>();
 builder.Services.AddScoped<IAssignmentChatService, AssignmentChatService>();
+builder.Services.AddHostedService<AssignmentDeadlineCheckerService>();
+
 
 builder.Services.AddSession(options =>
 {

@@ -26,7 +26,7 @@ public class AccountService : IAccountService
     {
         var normalizedEmail = email.ToUpperInvariant();
         var user = await _userRepository.GetUserByEmailAsync(normalizedEmail);
-        if (user is null) // Use 'is null' for nullable types
+        if (user is null)
         {
             return null;
         }
@@ -83,5 +83,10 @@ public class AccountService : IAccountService
         {
             throw new Exception($"Failed to add role '{role}' to user '{email}'.");
         }
+    }
+
+    public async Task<IEnumerable<UserAccount>> GetUsersByAccountTypeAsync(string accountType)
+    {
+        return await _userRepository.GetByAccountTypeAsync(accountType);
     }
 }

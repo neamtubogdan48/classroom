@@ -41,5 +41,10 @@ namespace mvc.Services
         {
             return await _documentRepository.GetDocumentsByAssignmentIdAsync(assignmentId);
         }
+
+        public async Task<bool> HasNotificationWithDescriptionAsync(string userId, string description)
+        {
+            return await _documentRepository.HasNotificationWithDescriptionAsync(userId, description);
+        }
     }
 }

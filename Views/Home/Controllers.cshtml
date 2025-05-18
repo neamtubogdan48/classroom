@@ -1,0 +1,82 @@
+﻿@model mvc.Models.UserAccount
+
+@{
+    ViewData["Title"] = "Controllers";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>User Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/controllers.css" asp-append-version="true">
+    <style type="text/css">
+        body {
+            margin-top: 20px;
+            background: #f8f8f8
+        }
+    </style>
+</head>
+<body>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="container">
+        <div class="row flex-lg-nowrap">
+            <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
+                <div class="card p-3">
+                    <div class="e-navlist e-navlist--active-bg">
+                        <ul class="nav">
+							<li class="nav-item"><a class="nav-link px-2" asp-action="Home" target="__blank"><i class="fa fa-fw fa-home mr-1"></i><span>Dashboard</span></a></li>
+                            <li class="nav-item"><a class="nav-link px-2" asp-action="UserProfile" target="__blank"><i class="fa fa-fw fa-cog mr-1"></i><span>Settings</span></a></li>
+                            <li class="nav-item"><a class="nav-link px-2" asp-action="Notifications" target="__blank"><i class="fa fa-fw fa-bell mr-1"></i><span>Alerts</span></a></li>
+                            @if (Model.accountType == "Admin")
+                            {
+                                <li class="nav-item"><a class="nav-link px-2" asp-action="Controllers" target="__blank"><i class="fa fa-fw fa-th mr-1"></i><span>CRUD</span></a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="controllersList">
+                                    <a asp-controller="AssignmentChat" asp-action="Index" class="loginButton">AssignmentChat Controller</a>
+                                    <a asp-controller="Assignment" asp-action="Index" class="loginButton">Assignment Controller</a>
+                                    <a asp-controller="Classroom" asp-action="Index" class="loginButton">Classroom Controller</a>
+                                    <a asp-controller="ClassroomStudents" asp-action="Index" class="loginButton">ClassroomStudents Controller</a>
+                                    <a asp-controller="Document" asp-action="Index" class="loginButton">Document Controller</a>
+                                    <a asp-controller="Notification" asp-action="Index" class="loginButton">Notification Controller</a>
+                                    <a asp-controller="Users" asp-action="Index" class="loginButton">Users Controller</a>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 mb-3">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="px-xl-3">
+                                    <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                                        <button type="submit" class="btn btn-block btn-secondary">
+                                            <i class="fa fa-sign-out"></i>
+                                            <span>Logout</span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

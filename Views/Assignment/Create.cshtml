@@ -9,29 +9,29 @@
 <h1 class="centerDiv">Create</h1>
 
 <div class="centerDiv">
-    <form asp-action="Create" method="post" enctype="multipart/form-data" class="teacher-form">
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
         <div>
-            <label asp-for="name">🎯 Assignment Title</label>
-            <input asp-for="name" class="form-control" placeholder="e.g. Assignment 1 - Sorting Algorithms" />
+            <label asp-for="name" class="control-label"></label>
+            <input asp-for="name" class="form-control" />
             <span asp-validation-for="name" class="text-danger"></span>
         </div>
         <div>
-            <label asp-for="description">📝 Description</label>
-            <textarea asp-for="description" class="form-control" rows="3" placeholder="e.g. Implement at least 2 sorting algorithms..."></textarea>
+            <label asp-for="description" class="control-label"></label>
+            <input asp-for="description" class="form-control" />
             <span asp-validation-for="description" class="text-danger"></span>
         </div>
         <div>
-            <label asp-for="deadline">⏰ Deadline</label>
+            <label asp-for="deadline" class="control-label"></label>
             <input asp-for="deadline" class="form-control" type="datetime-local" />
             <span asp-validation-for="deadline" class="text-danger"></span>
         </div>
         <div>
-            <label for="requirementsDocFile">📎 Attach File</label>
+            <label for="requirementsDocFile" class="control-label">Upload Document</label>
             <input type="file" name="requirementsDocFile" id="requirementsDocFile" class="form-control" />
             <span class="text-danger">@ViewData["FileUploadError"]</span>
         </div>
         <div>
-            <label asp-for="lateTurnInOption">Allow Late Turn-In</label>
+            <label asp-for="lateTurnInOption" class="control-label"></label>
             <select asp-for="lateTurnInOption" class="form-control">
                 <option value="true">True</option>
                 <option value="false">False</option>
@@ -39,16 +39,20 @@
             <span asp-validation-for="lateTurnInOption" class="text-danger"></span>
         </div>
         <div>
-            <label asp-for="noDeadlineOption">No Deadline Option</label>
+            <label asp-for="noDeadlineOption" class="control-label"></label>
             <select asp-for="noDeadlineOption" class="form-control">
                 <option value="true">True</option>
                 <option value="false">False</option>
             </select>
             <span asp-validation-for="noDeadlineOption" class="text-danger"></span>
         </div>
-        <input type="hidden" asp-for="classroomId" />
+        <div>
+            <label asp-for="classroomId" class="control-label"></label>
+            <input asp-for="classroomId" class="form-control" />
+            <span asp-validation-for="classroomId" class="text-danger"></span>
+        </div>
         <div class="centerDiv">
-            <input type="submit" value="📢 Publish Assignment" class="btn neon" />
+            <input type="submit" value="Create" class="btn" />
         </div>
     </form>
 </div>

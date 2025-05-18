@@ -50,6 +50,8 @@ public class UserRepository : IUserRepository
         existingUser.githubLink = user.githubLink;
         existingUser.PhoneNumber = user.PhoneNumber;
         existingUser.profilePhoto = user.profilePhoto;
+        existingUser.NormalizedEmail = user.NormalizedEmail;
+        existingUser.NormalizedUserName = user.NormalizedUserName;
 
         await _context.SaveChangesAsync();
     }
@@ -111,4 +113,10 @@ public class UserRepository : IUserRepository
         await _context.SaveChangesAsync();
     }
 
+    public async Task<IEnumerable<UserAccount>> GetByAccountTypeAsync(string accountType)
+    {
+        return await _context.Users
+            .Where(u => u.accountType == accountType)
+            .ToListAsync();
+    }
 }

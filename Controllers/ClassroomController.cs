@@ -41,7 +41,7 @@ namespace mvc.Controllers
         // POST: Classroom/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("name,code,professorId")] Classroom classroom, IFormFile photoFile)
+        public async Task<IActionResult> Create ([Bind("name,code,professorId")] Classroom classroom, IFormFile? photoFile)
         {
             if (photoFile != null && photoFile.Length > 0)
             {
@@ -82,13 +82,14 @@ namespace mvc.Controllers
             }
             else
             {
-                ModelState.AddModelError("photo", "Please upload a photo.");
+                // Assign a default photo path if no photo is uploaded
+                classroom.photo = "/images/classroom.jpg"; // Default photo path
             }
 
             if (ModelState.IsValid)
             {
                 await _classroomService.AddClassroomAsync(classroom);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Home", "Home");
             }
 
             return View(classroom);
@@ -195,7 +196,7 @@ namespace mvc.Controllers
             if (ModelState.IsValid)
             {
                 await _classroomService.UpdateClassroomAsync(existingClassroom);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Home", "Home");
             }
 
             return View(classroom);
@@ -212,7 +213,6 @@ namespace mvc.Controllers
             return View(classroom);
         }
 
-        // POST: Classroom/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -225,8 +225,36 @@ namespace mvc.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
+            // Notify all students in the classroom
+            var classroomStudentsService = HttpContext.RequestServices.GetService(typeof(IClassroomStudentsService)) as IClassroomStudentsService;
+            var notificationService = HttpContext.RequestServices.GetService(typeof(INotificationService)) as INotificationService;
+            if (classroomStudentsService != null && notificationService != null)
+            {
+                var students = await classroomStudentsService.GetClassroomStudentsByClassroomIdAsync(classroom.id);
+                foreach (var student in students)
+                {
+                    var notification = new Notification
+                    {
+                        userId = student.userId,
+                        name = "Classroom Deleted",
+                        description = $"The classroom '{classroom.name}' has been deleted.",
+                        timeSent = DateTime.UtcNow.AddHours(3)
+                    };
+                    await notificationService.AddNotificationAsync(notification);
+                }
+
+            var professorNotification = new Notification
+            {
+                userId = classroom.professorId,
+                name = "Classroom Deleted",
+                description = $"Your classroom '{classroom.name}' has been deleted.",
+                timeSent = DateTime.UtcNow.AddHours(3)
+            };
+            await notificationService.AddNotificationAsync(professorNotification);
+        }
+
             // Delete the photo from the server if it exists
-            if (!string.IsNullOrEmpty(classroom.photo))
+            if (!string.IsNullOrEmpty(classroom.photo) && classroom.photo != "/images/classroom.jpg")
             {
                 var photoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", classroom.photo.TrimStart('/'));
                 if (System.IO.File.Exists(photoPath))
@@ -237,7 +265,7 @@ namespace mvc.Controllers
 
             // Proceed to delete the classroom
             await _classroomService.DeleteClassroomAsync(id);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Home", "Home");
         }
 
         [HttpPost]
@@ -258,7 +286,7 @@ namespace mvc.Controllers
             // Update the classroom in the database
             await _classroomService.UpdateClassroomAsync(existingClassroom);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Home", "Home");
         }
     }
 }

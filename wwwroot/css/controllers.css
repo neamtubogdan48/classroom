@@ -1,0 +1,42 @@
+/* General Styles for controllersList */
+.controllersList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+    /* Styles for <a> links */
+    .controllersList a {
+        display: block;
+        text-align: center;
+        padding: 10px 15px;
+        font-size: 1rem;
+        font-weight: bold;
+        color: #ffffff;
+        background-color: #007bff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+        .controllersList a:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .controllersList a:active {
+            background-color: #003f7f;
+        }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .controllersList a {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+}

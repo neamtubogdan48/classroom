@@ -1,4 +1,5 @@
 using mvc.Models;
+using mvc.ViewModels;
 
 namespace mvc.IRepository
 {
@@ -9,5 +10,6 @@ namespace mvc.IRepository
         Task AddClassroomAsync(Classroom classroom);
         Task UpdateClassroomAsync(Classroom classroom);
         Task DeleteClassroomAsync(int id);
+        Task<Classroom?> GetClassroomByCodeAsync(int code);
     }
 }

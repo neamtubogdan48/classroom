@@ -4,8 +4,8 @@
     ViewData["Title"] = "Index";
 }
 
-<link rel="stylesheet" href="~/css/usersCRUD.css" asp-append-version="true" />
-<link rel="stylesheet" href="~/css/default.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/indexcrud.css" asp-append-version="true" />
+
 
 <h1 class="centerDiv">Assignments</h1>
 
@@ -75,8 +75,8 @@
                 @Html.DisplayFor(modelItem => item.classroomId)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id" class="btn">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id" class="btn">Details</a> |
+                <a asp-action="Edit" asp-route-id="@item.id" class="btn">Edit</a> 
+                <a asp-action="Details" asp-route-id="@item.id" class="btn">Details</a> 
                 <a asp-action="Delete" asp-route-id="@item.id" class="btn">Delete</a>
             </td>
         </tr>

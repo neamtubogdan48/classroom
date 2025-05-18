@@ -24,12 +24,7 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\uploads\documents\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\css\flux2.css" />
   </ItemGroup>
 
 </Project>

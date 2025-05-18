@@ -49,6 +49,7 @@ namespace mvc.IRepository
         {
             return await _context.Assignment
                 .Where(a => a.classroomId == classroomId)
+                .OrderBy(a => a.id)
                 .ToListAsync();
         }
 

@@ -11,6 +11,11 @@ namespace mvc.IRepository
         Task DeleteClassroomStudentAsync(int id);
         Task<IEnumerable<Classroom>> GetClassroomsByUserIdAsync(string userId);
         Task<Classroom?> GetClassroomByIdAsync(int id);
-        Task<ClassroomStudents?> GetClassroomStudentByIdAsync(int classroomId, string userId);
+        Task<ClassroomStudents?> GetClassroomStudentByIdAsync(string userId, int classroomId);
+        Task RemoveClassroomStudentAsync(int id);
+        Task<List<ClassroomStudents>> GetClassroomStudentsByAssignmentIdAsync(int assignmentId);
+        Task<ClassroomStudents?> GetClassroomStudentByUserAndClassroomAsync(string userId, int classroomId);
+        Task<IEnumerable<ClassroomStudents>> GetByClassroomIdAsync(int classroomId);
     }
 }
+
